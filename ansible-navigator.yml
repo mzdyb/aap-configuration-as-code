@@ -1,0 +1,11 @@
+---
+ansible-navigator:
+  ansible:
+    config:
+      path: ansible.cfg
+  execution-environment:
+    image: hub.rh.lab/ee-aap-cac:1.0
+    pull:
+      policy: missing
+  playbook-artifact:
+    enable: false
