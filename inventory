@@ -1,30 +1,6 @@
-cisco:
-  hosts:
-    cisco-rtr1:
-      ansible_host: 192.168.122.100
-    cisco-rtr2:
-      ansible_host: 192.168.122.101
-    cisco-sw1:
-      ansible_host: 192.168.122.104
-  vars:
-    ansible_network_os: cisco.ios.ios
-    ansible_connection: ansible.netcommon.network_cli
-    ansible_user: admin
-    ansible_password: redhat
-    ansible_become: true
-    ansible_become_method: enable
-    ansible_become_password: redhat
-
-switches:
-  hosts:
-    cisco-sw1:
-
-routers:
-  hosts:
-    cisco-rtr1:
-    cisco-rtr2:
-
-ungrouped:
-  hosts:
-    backup-host:
-      ansible_host: 192.168.122.10
+---
+hosts:
+  localhost:
+   vars:
+     ansible_connection: local
+     ansible_python_interpreter: "{{ansible_playbook_python}}"

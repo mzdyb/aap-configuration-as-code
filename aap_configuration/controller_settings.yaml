@@ -1,0 +1,74 @@
+---
+controller_settings:
+  - settings:
+      LICENSE:
+        sku: ES0113909
+        usage: Development/Test
+        pool_id: 2c94eb819182601401919cd93816743a
+        satellite: null
+        valid_key: true
+        license_date: 1755230399
+        license_type: enterprise
+        product_name: Red Hat Ansible Automation Platform
+        support_level: Self-Support
+        account_number: '5910538'
+        instance_count: 50
+        subscription_id: '15432317'
+        subscription_name: Employee SKU
+      SUBSCRIPTIONS_USERNAME: "rh-ee-mzdyb"
+      SUBSCRIPTIONS_PASSWORD: "$encrypted$"
+      INSTALL_UUID: "74774d46-8ab9-4f68-a619-2e8a45dc6d31"
+      AD_HOC_COMMANDS:
+        - command
+        - shell
+        - yum
+        - apt
+        - apt_key
+        - apt_repository
+        - apt_rpm
+        - service
+        - group
+        - user
+        - mount
+        - ping
+        - selinux
+        - setup
+        - win_ping
+        - win_service
+        - win_updates
+        - win_group
+        - win_user
+      ALLOW_JINJA_IN_EXTRA_VARS: "template"
+      AWX_ISOLATION_SHOW_PATHS:
+        - /etc/pki/ca-trust:/etc/pki/ca-trust:O
+        - /usr/share/pki:/usr/share/pki:O
+      AWX_TASK_ENV:
+        {}
+      AWX_RUNNER_KEEPALIVE_SECONDS: "0"
+      GALAXY_TASK_ENV:
+        GIT_SSH_COMMAND: ssh -o StrictHostKeyChecking=no
+        ANSIBLE_FORCE_COLOR: 'false'
+      INSIGHTS_TRACKING_STATE: "true"
+      PROJECT_UPDATE_VVV: "false"
+      AWX_ROLES_ENABLED: "true"
+      AWX_COLLECTIONS_ENABLED: "true"
+      AWX_SHOW_PLAYBOOK_LINKS: "false"
+      AWX_MOUNT_ISOLATED_PATHS_ON_K8S: "false"
+      GALAXY_IGNORE_CERTS: "true"
+      STDOUT_MAX_BYTES_DISPLAY: "1048576"
+      EVENT_STDOUT_MAX_BYTES_DISPLAY: "1024"
+      MAX_WEBSOCKET_EVENT_RATE: "30"
+      SCHEDULE_MAX_JOBS: "10"
+      AWX_ANSIBLE_CALLBACK_PLUGINS:
+        []
+      DEFAULT_JOB_TIMEOUT: "0"
+      DEFAULT_JOB_IDLE_TIMEOUT: "0"
+      DEFAULT_INVENTORY_UPDATE_TIMEOUT: "0"
+      DEFAULT_PROJECT_UPDATE_TIMEOUT: "0"
+      ANSIBLE_FACT_CACHE_TIMEOUT: "0"
+      MAX_FORKS: "200"
+      AUTOMATION_ANALYTICS_LAST_GATHER: "2025-03-20T12:56:16.883494Z"
+      AUTOMATION_ANALYTICS_LAST_ENTRIES: "{"config": "2025-03-20T12:56:16.883Z", "counts": "2025-03-20T12:56:16.883Z", "cred_type_counts": "2025-03-20T12:56:16.883Z", "instance_info": "2025-03-20T12:56:16.883Z", "inventory_counts": "2025-03-20T12:56:16.883Z", "org_counts": "2025-03-20T12:56:16.883Z", "projects_by_scm_type": "2025-03-20T12:56:16.883Z", "query_info": "2025-03-20T12:56:16.883Z", "events_table": "2025-03-20T12:56:16.883Z", "host_metric_summary_monthly_table": "2025-03-20T12:56:16.883Z", "host_metric_table_full": "2025-02-23T12:41:18.645Z", "unified_job_template_table": "2025-03-20T12:56:16.883Z", "unified_jobs_table": "2025-03-20T12:56:16.883Z", "workflow_job_node_table": "2025-03-20T12:56:16.883Z", "workflow_job_template_node_table": "2025-03-20T12:56:16.883Z", "host_metric_table": "2025-03-20T12:56:16.883Z"}"
+      CLEANUP_HOST_METRICS_LAST_TS: "2025-02-23T17:16:26.860338Z"
+      HOST_METRIC_SUMMARY_TASK_LAST_TS: "2025-03-18T13:46:28.888632Z"
+...

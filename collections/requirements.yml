@@ -1,11 +1,9 @@
 ---
 collections:
-  - name: ansible.platform
+  # - name: ansible.platform
   - name: ansible.hub
-  - name: ansible.controller
+  # - name: ansible.controller
+  - name: awx.awx
   - name: ansible.eda
   - name: infra.aap_configuration
 #  - name: infra.aap_configuration_extended
-  - name: infra.aap_utilities  
-  - name: containers.podman # required for infra.ee_utilities
-  - name: infra.ee_utilities

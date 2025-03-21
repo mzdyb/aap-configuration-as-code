@@ -1,0 +1,9 @@
+---
+controller_notifications:
+  - name: "network-events slack channel"
+    organization: "Default"
+    notification_type: "slack"
+    notification_configuration:
+      token: "$encrypted$"
+      channels: ['#network-events']
+...

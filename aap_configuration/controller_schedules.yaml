@@ -1,0 +1,75 @@
+---
+controller_schedules:
+  - name: "Cleanup Job Schedule"
+    description: !unsafe 'Automatically Generated Schedule'
+    enabled: true
+    unified_job_template: "Cleanup Job Details"
+    dtstart: "2024-12-01T17:14:42Z"
+    dtend: ""
+    timezone: "UTC"
+    rrule: "DTSTART:20241129T171442Z RRULE:FREQ=WEEKLY;INTERVAL=1;BYDAY=SU"
+    extra_data:
+      days: '120'
+    scm_branch: ""
+    forks: 0
+    job_slice_count: 0
+    timeout: 0
+    job_type: ""
+    job_tags: ""
+    skip_tags: ""
+    limit: ""
+    verbosity: 0
+  - name: "Cleanup Activity Schedule"
+    description: !unsafe 'Automatically Generated Schedule'
+    enabled: true
+    unified_job_template: "Cleanup Activity Stream"
+    dtstart: "2024-12-03T17:14:42Z"
+    dtend: ""
+    timezone: "UTC"
+    rrule: "DTSTART:20241129T171442Z RRULE:FREQ=WEEKLY;INTERVAL=1;BYDAY=TU"
+    extra_data:
+      days: '355'
+    scm_branch: ""
+    forks: 0
+    job_slice_count: 0
+    timeout: 0
+    job_type: ""
+    job_tags: ""
+    skip_tags: ""
+    limit: ""
+    verbosity: 0
+  - name: "Cleanup Expired Sessions"
+    description: !unsafe 'Cleans out expired browser sessions'
+    enabled: true
+    unified_job_template: "Cleanup Expired Sessions"
+    dtstart: "2024-11-29T17:15:28Z"
+    dtend: ""
+    timezone: "UTC"
+    rrule: "DTSTART:20241129T171528Z RRULE:FREQ=WEEKLY;INTERVAL=1"
+    scm_branch: ""
+    forks: 0
+    job_slice_count: 0
+    timeout: 0
+    job_type: ""
+    job_tags: ""
+    skip_tags: ""
+    limit: ""
+    verbosity: 0
+  - name: "Cleanup Expired OAuth 2 Tokens"
+    description: !unsafe 'Removes expired OAuth 2 access and refresh tokens'
+    enabled: true
+    unified_job_template: "Cleanup Expired OAuth 2 Tokens"
+    dtstart: "2024-11-29T17:15:28Z"
+    dtend: ""
+    timezone: "UTC"
+    rrule: "DTSTART:20241129T171528Z RRULE:FREQ=WEEKLY;INTERVAL=1"
+    scm_branch: ""
+    forks: 0
+    job_slice_count: 0
+    timeout: 0
+    job_type: ""
+    job_tags: ""
+    skip_tags: ""
+    limit: ""
+    verbosity: 0
+...

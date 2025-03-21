@@ -1,0 +1,182 @@
+---
+controller_workflows:
+  - name: "EDA for networks - interface status change"
+    description: !unsafe ''
+    organization: "Default"
+    state: "present"
+    simplified_workflow_nodes:
+      - identifier: "create incident"
+        workflow_job_template: "EDA for networks - interface status change"
+        unified_job_template: "EDA for networks - create incident"
+        limit: ""
+        limit: ""
+        organization: "Default"
+        all_parents_must_converge: "False"
+        success_nodes:
+          - interface recovery
+      - identifier: "update incident"
+        workflow_job_template: "EDA for networks - interface status change"
+        unified_job_template: "EDA for networks - update incident"
+        limit: ""
+        limit: ""
+        organization: "Default"
+        all_parents_must_converge: "False"
+      - identifier: "update&close incident"
+        workflow_job_template: "EDA for networks - interface status change"
+        unified_job_template: "EDA for networks - update and close incident"
+        limit: ""
+        limit: ""
+        organization: "Default"
+        all_parents_must_converge: "False"
+      - identifier: "interface recovery"
+        workflow_job_template: "EDA for networks - interface status change"
+        unified_job_template: "EDA for networks - interface recovery"
+        limit: ""
+        limit: ""
+        organization: "Default"
+        all_parents_must_converge: "False"
+        success_nodes:
+          - update&close incident
+        failure_nodes:
+          - update incident
+    ask_variables_on_launch: "True"
+    allow_simultaneous: "False"
+    scm_branch: ""
+    limit: ""
+    ask_limit_on_launch: true
+    ask_inventory_on_launch: false
+    webhook_service: ""
+    extra_vars: ""
+    survey_enabled: False
+  - name: "EDA for networks - bgp network prefix configuration change"
+    description: !unsafe ''
+    organization: "Default"
+    state: "present"
+    simplified_workflow_nodes:
+      - identifier: "create incident"
+        workflow_job_template: "EDA for networks - bgp network prefix configuration change"
+        unified_job_template: "EDA for networks - create incident"
+        limit: ""
+        limit: ""
+        organization: "Default"
+        all_parents_must_converge: "False"
+        success_nodes:
+          - enforce SoT config
+      - identifier: "enforce SoT config"
+        workflow_job_template: "EDA for networks - bgp network prefix configuration change"
+        unified_job_template: "EDA for networks - enforce configuration from SoT"
+        limit: ""
+        limit: ""
+        organization: "Default"
+        all_parents_must_converge: "False"
+        success_nodes:
+          - update&close incident
+        failure_nodes:
+          - update incident
+      - identifier: "update&close incident"
+        workflow_job_template: "EDA for networks - bgp network prefix configuration change"
+        unified_job_template: "EDA for networks - update and close incident"
+        limit: ""
+        limit: ""
+        organization: "Default"
+        all_parents_must_converge: "False"
+      - identifier: "update incident"
+        workflow_job_template: "EDA for networks - bgp network prefix configuration change"
+        unified_job_template: "EDA for networks - update incident"
+        limit: ""
+        limit: ""
+        organization: "Default"
+        all_parents_must_converge: "False"
+    ask_variables_on_launch: "True"
+    allow_simultaneous: "False"
+    scm_branch: ""
+    limit: ""
+    ask_limit_on_launch: true
+    ask_inventory_on_launch: false
+    webhook_service: ""
+    extra_vars: ""
+    notification_templates_started:
+      - "network-events slack channel"
+    notification_templates_success:
+      - "network-events slack channel"
+    survey_enabled: False
+  - name: "paloalto - provision fw configuration and security policies"
+    description: !unsafe ''
+    organization: "Default"
+    state: "present"
+    simplified_workflow_nodes:
+      - identifier: "fw configuration"
+        workflow_job_template: "paloalto - provision fw configuration and security policies"
+        unified_job_template: "paloalto - configure fw"
+        limit: ""
+        limit: ""
+        organization: "Default"
+        all_parents_must_converge: "False"
+        success_nodes:
+          - fw policies
+      - identifier: "fw policies"
+        workflow_job_template: "paloalto - provision fw configuration and security policies"
+        unified_job_template: "paloalto - create security policies"
+        limit: ""
+        limit: ""
+        organization: "Default"
+        all_parents_must_converge: "False"
+        success_nodes:
+          - commit configuration
+      - identifier: "commit configuration"
+        workflow_job_template: "paloalto - provision fw configuration and security policies"
+        unified_job_template: "paloalto - commit configuration"
+        limit: ""
+        limit: ""
+        organization: "Default"
+        all_parents_must_converge: "False"
+    ask_variables_on_launch: "False"
+    allow_simultaneous: "False"
+    scm_branch: ""
+    limit: ""
+    ask_limit_on_launch: false
+    ask_inventory_on_launch: false
+    webhook_service: ""
+    extra_vars: ""
+    survey_enabled: False
+  - name: "paloalto - deprovision fw configuration and security policies"
+    description: !unsafe ''
+    organization: "Default"
+    state: "present"
+    simplified_workflow_nodes:
+      - identifier: "remove fw configuration"
+        workflow_job_template: "paloalto - deprovision fw configuration and security policies"
+        unified_job_template: "paloalto - configure fw"
+        limit: ""
+        limit: ""
+        organization: "Default"
+        all_parents_must_converge: "False"
+        success_nodes:
+          - commit configuration
+      - identifier: "remove fw policies"
+        workflow_job_template: "paloalto - deprovision fw configuration and security policies"
+        unified_job_template: "paloalto - create security policies"
+        limit: ""
+        limit: ""
+        organization: "Default"
+        all_parents_must_converge: "False"
+        success_nodes:
+          - remove fw configuration
+      - identifier: "commit configuration"
+        workflow_job_template: "paloalto - deprovision fw configuration and security policies"
+        unified_job_template: "paloalto - commit configuration"
+        limit: ""
+        limit: ""
+        organization: "Default"
+        all_parents_must_converge: "False"
+    ask_variables_on_launch: "False"
+    allow_simultaneous: "False"
+    scm_branch: ""
+    limit: ""
+    ask_limit_on_launch: false
+    ask_inventory_on_launch: false
+    webhook_service: ""
+    extra_vars:
+      fw_config_state: absent
+      fw_rules_state: absent
+    survey_enabled: False

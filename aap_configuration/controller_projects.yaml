@@ -1,0 +1,73 @@
+---
+controller_projects:
+  - name: "Demo Project"
+    description: ""
+    organization: "Default"
+    scm_type: "git"
+    scm_url: "https://github.com/ansible/ansible-tower-samples"
+    scm_branch: ""
+    scm_clean: false
+    scm_delete_on_update: false
+    scm_update_on_launch: false
+    scm_update_cache_timeout: "0"
+    scm_refspec: ""
+    allow_override: false
+    update_project: false
+    timeout: "0"
+  - name: "eda-for-networks"
+    description: ""
+    organization: "Default"
+    scm_type: "git"
+    scm_url: "https://github.com/mzdyb/event-driven-ansible-for-networks.git"
+    scm_branch: ""
+    scm_clean: false
+    scm_delete_on_update: false
+    scm_update_on_launch: false
+    scm_update_cache_timeout: "0"
+    scm_refspec: ""
+    allow_override: false
+    update_project: false
+    timeout: "0"
+  - name: "paloalto"
+    description: ""
+    organization: "Default"
+    scm_type: "git"
+    scm_url: "https://github.com/mzdyb/paloalto.git"
+    scm_branch: ""
+    scm_clean: false
+    scm_delete_on_update: false
+    scm_update_on_launch: false
+    scm_update_cache_timeout: "0"
+    scm_refspec: ""
+    allow_override: false
+    update_project: false
+    timeout: "0"
+  - name: "cisco-aci"
+    description: ""
+    organization: "Default"
+    scm_type: "git"
+    scm_url: "https://github.com/mzdyb/cisco-aci.git"
+    scm_branch: ""
+    scm_clean: false
+    scm_delete_on_update: false
+    scm_update_on_launch: false
+    scm_update_cache_timeout: "0"
+    scm_refspec: ""
+    allow_override: false
+    update_project: false
+    timeout: "0"
+  - name: "my_project"
+    description: ""
+    organization: "Default"
+    scm_type: "git"
+    scm_url: "https://github.com/ansible/ansible-tower-samples"
+    scm_branch: ""
+    scm_clean: false
+    scm_delete_on_update: false
+    scm_update_on_launch: false
+    scm_update_cache_timeout: "0"
+    scm_refspec: ""
+    allow_override: false
+    update_project: false
+    timeout: "0"
+...

@@ -1,0 +1,65 @@
+---
+version: 3
+
+options:
+  package_manager_path: /usr/bin/microdnf
+
+images:
+  base_image:
+    name: registry.redhat.io/ansible-automation-platform-25/ee-minimal-rhel9:latest
+
+# build_arg_defaults:
+#   ANSIBLE_GALAXY_CLI_COLLECTION_OPTS: "--ignore-certs"
+
+additional_build_files:
+  - src: files/ansible.cfg
+    dest: configs
+  - src: files/infra-aap_configuration_extended-1.0.0-devel.tar.gz
+    dest: collections
+
+additional_build_steps:
+  prepend_galaxy:
+    - ADD _build/configs/ansible.cfg ~/.ansible.cfg
+    - COPY _build/collections /tmp
+
+    # List of servers to download collections
+    - ENV ANSIBLE_GALAXY_SERVER_LIST=certified_content,validated_content,galaxy
+
+    # Red Hat Certified Content Collections
+    - ENV ANSIBLE_GALAXY_SERVER_CERTIFIED_CONTENT_URL=https://console.redhat.com/api/automation-hub/content/published/
+    - ENV ANSIBLE_GALAXY_SERVER_CERTIFIED_CONTENT_AUTH_URL=https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token
+    # For below ARG variable provide token with --build-arg cli parameter (ansible-builder build -t <image tag> --build-arg ANSIBLE_GALAXY_SERVER_CERTIFIED_CONTENT_TOKEN=<token>)
+    - ARG ANSIBLE_GALAXY_SERVER_CERTIFIED_CONTENT_TOKEN
+
+    # Red Hat Validated Content Collections
+    - ENV ANSIBLE_GALAXY_SERVER_VALIDATED_CONTENT_URL=https://console.redhat.com/api/automation-hub/content/validated/
+    - ENV ANSIBLE_GALAXY_SERVER_VALIDATED_CONTENT_AUTH_URL=https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token
+    # For below ARG variable provide token with --build-arg cli parameter (ansible-builder build -t <image tag> --build-arg ANSIBLE_GALAXY_SERVER_VALIDATED_CONTENT_TOKEN=<token>)
+    - ARG ANSIBLE_GALAXY_SERVER_VALIDATED_CONTENT_TOKEN
+
+    # Ansible Galaxy fallback
+    - ENV ANSIBLE_GALAXY_SERVER_GALAXY_URL=https://galaxy.ansible.com/
+
+
+dependencies:
+  galaxy:
+    collections:
+      - name: ansible.platform
+      - name: ansible.hub
+      - name: ansible.controller
+      - name: ansible.eda
+      - name: infra.aap_configuration
+      # - name: infra.aap_configuration_extended
+      # - name: infra.aap_utilities  
+      # - name: containers.podman # required for infra.ee_utilities
+      # - name: infra.ee_utilities
+      - name: infra.aap_configuration_extended
+        type: file
+        source: /tmp/infra-aap_configuration_extended-1.0.0-devel.tar.gz
+  system:
+    - gcc [platform:rpm]
+    - systemd-devel [platform:rpm]
+    - python3.11-devel [platform:rpm]
+
+  python_interpreter:
+     python_path: "/usr/bin/python3.11"

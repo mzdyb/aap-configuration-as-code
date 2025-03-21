@@ -1,0 +1,8 @@
+---
+eda_projects:
+  - name: "eda-for-networks1"
+    description: ""
+    organization: "Default"
+    url: https://github.com/mzdyb/event-driven-ansible-for-networks.git
+    tls_validation: true
+    state: absent
