@@ -19,7 +19,7 @@ The other approach is to use [infra.aap_configuration](https://github.com/redhat
 The intended state of AAP configuration is defined in the files in 'aap_configuration' folder. It is up to us if we want to keep AAP configuration in one or separate files. Depending on our needs the good practice is to keep configuration hierarchical as separate files in structured directories. We can create AAP configuration from scratch but the easier approach is to use [controller_configuration.filetree_create](https://github.com/redhat-cop/aap_configuration_extended/tree/devel/roles/filetree_create) role from [aap_configuration_extended](https://github.com/redhat-cop/aap_configuration_extended) collection. This role connects to AAP and generates configuration files for us. At the time of creating this repository there were some issues with this role during the configuration discovery (hence 'ignore_errors: true' parameter in 'gather_configuration' playbook) but still it was very helpful for creating initial configuration files, just some final touches had to be added to cover missing parts.
 
 
-It is up to us how we will be manageing our AAP configuration. When our data structure is defined and implemented on AAP it will not be overwritten thanks to the crucial Ansible feature which is **idempotency**. When we want to remove some configuration object we might use the following workflow:
+When our data structure is defined and implemented on AAP it is up to us how we will be managing our AAP configuration after initial implementation. When we are running Ansible playbook and there is no configuration drift between SoT and AAP configuration will never be overwritten thanks to the crucial Ansible feature which is **idempotency**. When we want to remove some configuration object we might use the following workflow:
 
 Removing CaC-configured AAP configuration objects:
   1. Add `state: absent` to configuration object which we want to remove. For example:
@@ -31,3 +31,17 @@ aap_organizations:
   2. Run ansible playbook to implement configuration
   2. Verify removal in AAP UI/API
   3. Remove 'my_organization' entry from YAML file in new commit
+
+
+## Additional resources
+- [ansible-automation-controller-cac-gitops](https://www.redhat.com/en/blog/ansible-automation-controller-cac-gitops)
+- [automation-controller-active-passive-architecture-cac](https://www.redhat.com/en/blog/automation-controller-active-passive-architecture-cac)
+- [filetree_create automate the automation](https://github.com/redhat-cop/aap_configuration_extended/blob/devel/roles/filetree_create/automatetheautomation.md)
+
+
+## Feedback
+Feedback is always welcome! If you have any comments, please reach me out
+
+## Author
+
+[@mzdyb](https://www.linkedin.com/in/michal-zdyb-9aa4046/)
