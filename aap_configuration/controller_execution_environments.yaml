@@ -1,35 +1,33 @@
 ---
 controller_execution_environments:
   - name: "Hub Minimal execution environment"
-    description: !unsafe ''
     image: "aap.rh.lab/ee-minimal-rhel8:latest"
     pull: ""
+
   - name: "Hub Default execution environment"
-    description: !unsafe ''
     image: "aap.rh.lab/ee-supported-rhel8:latest"
     pull: ""
+
   - name: "Minimal execution environment"
-    description: !unsafe ''
     image: "registry.redhat.io/ansible-automation-platform-25/ee-minimal-rhel8:latest"
     pull: ""
+
   - name: "Default execution environment"
-    description: !unsafe ''
     image: "registry.redhat.io/ansible-automation-platform-25/ee-supported-rhel8:latest"
     pull: ""
+
   - name: "Control Plane Execution Environment"
-    description: !unsafe ''
     image: "registry.redhat.io/ansible-automation-platform-25/ee-supported-rhel8:latest"
     pull: ""
+
   - name: "ee-network"
-    description: !unsafe ''
     image: "aap.rh.lab/ee-network:1.8"
     pull: "missing"
+
   - name: "ee-panos"
-    description: !unsafe ''
     image: "aap.rh.lab/ee-panos:1.4"
     pull: "missing"
+ 
   - name: "ee-network-aci"
-    description: !unsafe ''
     image: "aap.rh.lab/ee-network-aci:1.0"
     pull: "missing"
-...

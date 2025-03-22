@@ -1,23 +1,21 @@
 ---
 eda_decision_environments:
   - name: "Default Decision Environment"
-    description: ""
     image_url: "registry.redhat.io/ansible-automation-platform-25/de-supported-rhel8:latest"
     organization: "Default"
     eda_credential: "registry.redhat.io"
+
   - name: "Hub Default Decision Environment"
-    description: ""
     image_url: "aap.rh.lab/de-supported-rhel8:latest"
     organization: "Default"
     eda_credential: "Hub Decision Environment Container Registry"
+
   - name: "de-supported-rhel9"
-    description: ""
     image_url: "registry.redhat.io/ansible-automation-platform-25/de-supported-rhel9"
     organization: "Default"
     eda_credential: "registry.redhat.io"
+
   - name: "my-decision-environment"
-    description: ""
     image_url: "aap.rh.lab/my-decision-environment:1.0"
     organization: "Default"
     eda_credential: "Hub Decision Environment Container Registry"
-...

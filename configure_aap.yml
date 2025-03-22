@@ -1,11 +1,14 @@
 ---
 - name: Configure AAP
   hosts: localhost
-  vars:
-    aap_username: "{{ vault_aap_username | default(lookup('env', 'CONTROLLER_USERNAME')) }}"
-    aap_password: "{{ vault_aap_password | default(lookup('env', 'CONTROLLER_PASSWORD')) }}"
-    aap_hostname: "{{ vault_aap_hostname | default(lookup('env', 'CONTROLLER_HOST')) }}"
-    aap_validate_certs: false
+  # vars:
+    # aap_username: "{{ vault_aap_username | default(lookup('env', 'CONTROLLER_USERNAME')) }}"
+    # aap_password: "{{ vault_aap_password | default(lookup('env', 'CONTROLLER_PASSWORD')) }}"
+    # aap_hostname: "{{ vault_aap_hostname | default(lookup('env', 'CONTROLLER_HOST')) }}"
+    # aap_validate_certs: false
+    # aap_username: aap_access.aap_username
+    # aap_aap_password: aap_access.aap_password
+    # aap_aap_hostname: aap_access.aap_hostname
 
   # pre_tasks:
   #   - name: Include AAP configuration variables
@@ -13,9 +16,14 @@
   #       dir: ./aap_configuration
 
   pre_tasks:
+    - name: Include credentials from file
+      ansible.builtin.include_vars:
+        file: ./secret_vars
+      no_log: true
+
     - name: Include variables from file
       ansible.builtin.include_vars:
-        file: ./aap_configuration/eda_projects.yaml
+        file: ./aap_configuration/gateway_users.yaml
 
   roles:
     - infra.aap_configuration.dispatch

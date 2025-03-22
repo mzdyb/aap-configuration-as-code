@@ -6,4 +6,4 @@ controller_notifications:
     notification_configuration:
       token: "$encrypted$"
       channels: ['#network-events']
-...
+

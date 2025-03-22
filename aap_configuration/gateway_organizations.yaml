@@ -1,4 +1,8 @@
 ---
-gateway_organizations:
+aap_organizations:
   - name: "Default"
     description: "The default organization for Ansible Automation Platform"
+  - name: "Organization1"
+    description: "My 1st organization"
+  - name: "Organization2"
+    description: "My 2nd organization"
