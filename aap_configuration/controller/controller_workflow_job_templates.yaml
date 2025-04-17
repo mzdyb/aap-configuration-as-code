@@ -116,3 +116,49 @@ controller_workflows:
         workflow_job_template: "paloalto - deprovision fw configuration and security policies"
         unified_job_template: "paloalto - commit configuration"
         all_parents_must_converge: "False"
+
+  - name: "cisco aci - configure aci"
+    organization: "Default"
+    state: "present"
+    simplified_workflow_nodes:
+      - identifier: "synchronize SoT"
+        workflow_job_template: "cisco aci - configure aci"
+        unified_job_template: "cisco-aci"
+        all_parents_must_converge: "False"
+        success_nodes:
+          - configure network objects
+      - identifier: "configure network objects"
+        workflow_job_template: "cisco aci - configure aci"
+        unified_job_template: "cisco aci - configure network objects"
+        all_parents_must_converge: "False"
+        success_nodes:
+          - configure APs & EPGs
+        failure_nodes:
+          - some action if failed
+      - identifier: "some action if failed"
+        workflow_job_template: "cisco aci - configure aci"
+        unified_job_template: "Demo Job Template"
+        all_parents_must_converge: "False"
+      - identifier: "configure APs & EPGs"
+        workflow_job_template: "cisco aci - configure aci"
+        unified_job_template: "cisco aci - configure APs and EPGs"
+        all_parents_must_converge: "False"
+        success_nodes:
+          - configure filters
+        failure_nodes:
+          - another action if failed
+      - identifier: "another action if failed"
+        workflow_job_template: "cisco aci - configure aci"
+        unified_job_template: "Demo Job Template"
+        all_parents_must_converge: "False"
+      - identifier: "configure filters"
+        workflow_job_template: "cisco aci - configure aci"
+        unified_job_template: "cisco aci - configure filters"
+        all_parents_must_converge: "False"
+        success_nodes:
+          - configure contracts
+      - identifier: "configure contracts"
+        workflow_job_template: "cisco aci - configure aci"
+        unified_job_template: "cisco aci - configure contracts"
+        all_parents_must_converge: "False"
+
