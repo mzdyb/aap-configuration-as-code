@@ -1,0 +1,161 @@
+---
+controller_templates:
+  - name: "cisco aci - configure APs and EPGs"
+    project: "cisco-aci"
+    inventory: "cisco aci inventory"
+    playbook: "configure_aci.yml"
+    job_type: "run"
+    job_tags: "aps,epgs"
+
+  - name: "cisco aci - configure contracts"
+    project: "cisco-aci"
+    inventory: "cisco aci inventory"
+    playbook: "configure_aci.yml"
+    job_type: "run"
+    job_tags: "contracts"
+
+  - name: "cisco aci - configure filters"
+    organization: "Default"
+    project: "cisco-aci"
+    inventory: "cisco aci inventory"
+    playbook: "configure_aci.yml"
+    job_type: "run"
+    job_tags: "filters"
+
+  - name: "cisco aci - configure network objects"
+    project: "cisco-aci"
+    inventory: "cisco aci inventory"
+    playbook: "configure_aci.yml"
+    job_type: "run"
+    job_tags: "tenants,vrfs,bds,subnets"
+
+  - name: "cisco aci - query aci objects"
+    project: "cisco-aci"
+    inventory: "cisco aci inventory"
+    playbook: "query_aci.yml"
+    job_type: "run"
+    credentials:
+      - "aap.rh.lab"
+    job_tags: "tenants,vrfs,bds,subnets"
+
+  - name: "Demo Job Template"
+    project: "Demo Project"
+    inventory: "Demo Inventory"
+    playbook: "hello_world.yml"
+    job_type: "run"
+    credentials:
+      - "Demo Credential"
+
+  - name: "EDA for networks - create incident"
+    project: "eda-for-networks"
+    inventory: "EDA for networks inventory"
+    playbook: "playbooks/manage_incident.yml"
+    verbosity: 3
+    job_type: "run"
+    credentials:
+      - "servicenow-instance"
+    job_tags: "create_incident"
+    notification_templates_started:
+      - "network-events slack channel"
+    notification_templates_success:
+      - "network-events slack channel"
+
+  - name: "EDA for networks - enforce configuration from SoT"
+    organization: "Default"
+    project: "eda-for-networks"
+    inventory: "EDA for networks inventory"
+    playbook: "playbooks/configure_infrastructure.yml"
+    verbosity: 0
+    job_type: "run"
+    credentials:
+      - "EDA for networks Arista credentials"
+    notification_templates_started:
+      - "network-events slack channel"
+    notification_templates_success:
+      - "network-events slack channel"
+
+  - name: "EDA for networks - interface recovery"
+    project: "eda-for-networks"
+    inventory: "EDA for networks inventory"
+    playbook: "playbooks/interface_recovery.yml"
+    job_type: "run"
+    credentials:
+      - "EDA for networks Arista credentials"
+    notification_templates_started:
+      - "network-events slack channel"
+    notification_templates_success:
+      - "network-events slack channel"
+
+  - name: "EDA for networks - update and close incident"
+    project: "eda-for-networks"
+    inventory: "EDA for networks inventory"
+    playbook: "playbooks/manage_incident.yml"
+    job_type: "run"
+    credentials:
+      - "servicenow-instance"
+    job_tags: "update_incident_succesfull"
+    notification_templates_started:
+      - "network-events slack channel"
+    notification_templates_success:
+      - "network-events slack channel"
+
+  - name: "EDA for networks - update incident"
+    project: "eda-for-networks"
+    inventory: "EDA for networks inventory"
+    playbook: "playbooks/manage_incident.yml"
+    job_type: "run"
+    credentials:
+      - "servicenow-instance"
+    job_tags: "update_incident_unsuccesfull"
+    notification_templates_started:
+      - "network-events slack channel"
+    notification_templates_success:
+      - "network-events slack channel"
+
+  - name: "paloalto - basic fw operations"
+    project: "paloalto"
+    inventory: "paloalto inventory"
+    playbook: "basic_fw_operations.yml"
+    job_type: "run"
+    execution_environment: "ee-panos"
+
+  - name: "paloalto - commit configuration"
+    project: "paloalto"
+    inventory: "paloalto inventory"
+    playbook: "commit_config.yml"
+    job_type: "run"
+    execution_environment: "ee-panos"
+
+  - name: "paloalto - configure fw"
+    project: "paloalto"
+    inventory: "paloalto inventory"
+    playbook: "configure_fw.yml"
+    job_type: "run"
+    execution_environment: "ee-panos"
+
+  - name: "paloalto - create security policies"
+    project: "paloalto"
+    inventory: "paloalto inventory"
+    playbook: "create_security_policies.yml"
+    job_type: "run"
+    execution_environment: "ee-panos"
+
+  - name: "checkpoint - install policies"
+    project: "checkpoint"
+    inventory: "checkpoint inventory"
+    playbook: "playbooks/install_policy.yml"
+    job_type: "run"
+  
+  - name: "checkpoint - manage access rules"
+    project: "checkpoint"
+    inventory: "checkpoint inventory"
+    playbook: "playbooks/manage_configuration.yml"
+    job_type: "run"
+    job_tags: "access_rules"
+
+  - name: "checkpoint - manage objects"
+    project: "checkpoint"
+    inventory: "checkpoint inventory"
+    playbook: "playbooks/manage_configuration.yml"
+    job_type: "run"
+    job_tags: "objects"
