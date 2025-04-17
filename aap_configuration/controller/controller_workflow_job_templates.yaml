@@ -162,3 +162,23 @@ controller_workflows:
         unified_job_template: "cisco aci - configure contracts"
         all_parents_must_converge: "False"
 
+  - name: "checkpoint - manage configuration"
+    organization: "Default"
+    state: "present"
+    simplified_workflow_nodes:
+      - identifier: "create objects"
+        workflow_job_template: "checkpoint - manage configuration"
+        unified_job_template: "checkpoint - manage objects"
+        all_parents_must_converge: "False"
+        success_nodes:
+          - create access rules
+      - identifier: "create access rules"
+        workflow_job_template: "checkpoint - manage configuration"
+        unified_job_template: "checkpoint - manage access rules"
+        all_parents_must_converge: "False"
+        success_nodes:
+          - install policies
+      - identifier: "install policies"
+        workflow_job_template: "checkpoint - manage configuration"
+        unified_job_template: "checkpoint - install policies"
+        all_parents_must_converge: "False"
