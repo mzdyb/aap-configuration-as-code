@@ -6,6 +6,7 @@ controller_templates:
     playbook: "configure_aci.yml"
     job_type: "run"
     job_tags: "aps,epgs"
+    state: present
 
   - name: "cisco aci - configure contracts"
     project: "cisco-aci"
@@ -13,6 +14,7 @@ controller_templates:
     playbook: "configure_aci.yml"
     job_type: "run"
     job_tags: "contracts"
+    state: present
 
   - name: "cisco aci - configure filters"
     organization: "Default"
@@ -21,6 +23,7 @@ controller_templates:
     playbook: "configure_aci.yml"
     job_type: "run"
     job_tags: "filters"
+    state: present
 
   - name: "cisco aci - configure network objects"
     project: "cisco-aci"
@@ -28,6 +31,7 @@ controller_templates:
     playbook: "configure_aci.yml"
     job_type: "run"
     job_tags: "tenants,vrfs,bds,subnets"
+    state: present
 
   - name: "cisco aci - query aci objects"
     project: "cisco-aci"
@@ -37,6 +41,7 @@ controller_templates:
     credentials:
       - "aap.rh.lab"
     job_tags: "tenants,vrfs,bds,subnets"
+    state: present
 
   - name: "Demo Job Template"
     project: "Demo Project"
@@ -45,6 +50,7 @@ controller_templates:
     job_type: "run"
     credentials:
       - "Demo Credential"
+    state: present
 
   - name: "EDA for networks - create incident"
     project: "eda-for-networks"
@@ -59,6 +65,7 @@ controller_templates:
       - "network-events slack channel"
     notification_templates_success:
       - "network-events slack channel"
+    state: present
 
   - name: "EDA for networks - enforce configuration from SoT"
     organization: "Default"
@@ -73,6 +80,7 @@ controller_templates:
       - "network-events slack channel"
     notification_templates_success:
       - "network-events slack channel"
+    state: present
 
   - name: "EDA for networks - interface recovery"
     project: "eda-for-networks"
@@ -85,6 +93,7 @@ controller_templates:
       - "network-events slack channel"
     notification_templates_success:
       - "network-events slack channel"
+    state: present
 
   - name: "EDA for networks - update and close incident"
     project: "eda-for-networks"
@@ -98,6 +107,7 @@ controller_templates:
       - "network-events slack channel"
     notification_templates_success:
       - "network-events slack channel"
+    state: present
 
   - name: "EDA for networks - update incident"
     project: "eda-for-networks"
@@ -111,6 +121,7 @@ controller_templates:
       - "network-events slack channel"
     notification_templates_success:
       - "network-events slack channel"
+    state: present
 
   - name: "paloalto - basic fw operations"
     project: "paloalto"
@@ -118,6 +129,7 @@ controller_templates:
     playbook: "basic_fw_operations.yml"
     job_type: "run"
     execution_environment: "ee-panos"
+    state: present
 
   - name: "paloalto - commit configuration"
     project: "paloalto"
@@ -125,6 +137,7 @@ controller_templates:
     playbook: "commit_config.yml"
     job_type: "run"
     execution_environment: "ee-panos"
+    state: present
 
   - name: "paloalto - configure fw"
     project: "paloalto"
@@ -132,6 +145,7 @@ controller_templates:
     playbook: "configure_fw.yml"
     job_type: "run"
     execution_environment: "ee-panos"
+    state: present
 
   - name: "paloalto - create security policies"
     project: "paloalto"
@@ -139,12 +153,14 @@ controller_templates:
     playbook: "create_security_policies.yml"
     job_type: "run"
     execution_environment: "ee-panos"
+    state: present
 
   - name: "checkpoint - install policies"
     project: "checkpoint"
     inventory: "checkpoint inventory"
     playbook: "playbooks/install_policy.yml"
     job_type: "run"
+    state: present
   
   - name: "checkpoint - manage access rules"
     project: "checkpoint"
@@ -152,6 +168,7 @@ controller_templates:
     playbook: "playbooks/manage_configuration.yml"
     job_type: "run"
     job_tags: "access_rules"
+    state: present
 
   - name: "checkpoint - manage objects"
     project: "checkpoint"
@@ -159,3 +176,5 @@ controller_templates:
     playbook: "playbooks/manage_configuration.yml"
     job_type: "run"
     job_tags: "objects"
+    state: present
+

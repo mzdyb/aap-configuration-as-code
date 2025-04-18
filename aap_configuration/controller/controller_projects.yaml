@@ -1,73 +1,36 @@
 ---
 controller_projects:
   - name: "Demo Project"
-    description: ""
     organization: "Default"
+    default_environment: 
     scm_type: "git"
     scm_url: "https://github.com/ansible/ansible-tower-samples"
-    scm_branch: ""
-    scm_clean: false
-    scm_delete_on_update: false
-    scm_update_on_launch: false
-    scm_update_cache_timeout: "0"
-    scm_refspec: ""
-    allow_override: false
-    update_project: false
-    timeout: "0"
+    state: present
+
   - name: "eda-for-networks"
-    description: ""
     organization: "Default"
+    default_environment: ee-network
     scm_type: "git"
     scm_url: "https://github.com/mzdyb/event-driven-ansible-for-networks.git"
-    scm_branch: ""
-    scm_clean: false
-    scm_delete_on_update: false
-    scm_update_on_launch: false
-    scm_update_cache_timeout: "0"
-    scm_refspec: ""
-    allow_override: false
-    update_project: false
-    timeout: "0"
+    state: present
+
   - name: "paloalto"
-    description: ""
     organization: "Default"
+    default_environment: ee-panos
     scm_type: "git"
     scm_url: "https://github.com/mzdyb/paloalto.git"
-    scm_branch: ""
-    scm_clean: false
-    scm_delete_on_update: false
-    scm_update_on_launch: false
-    scm_update_cache_timeout: "0"
-    scm_refspec: ""
-    allow_override: false
-    update_project: false
-    timeout: "0"
+    state: present
+
   - name: "cisco-aci"
-    description: ""
     organization: "Default"
+    default_environment: ee-network-aci
     scm_type: "git"
     scm_url: "https://github.com/mzdyb/cisco-aci.git"
-    scm_branch: ""
-    scm_clean: false
-    scm_delete_on_update: false
-    scm_update_on_launch: false
-    scm_update_cache_timeout: "0"
-    scm_refspec: ""
-    allow_override: false
-    update_project: false
-    timeout: "0"
-  - name: "my_project"
-    description: ""
+    state: present
+
+  - name: "checkpoint"
     organization: "Default"
+    default_environment: ee-network-checkpoint
     scm_type: "git"
-    scm_url: "https://github.com/ansible/ansible-tower-samples"
-    scm_branch: ""
-    scm_clean: false
-    scm_delete_on_update: false
-    scm_update_on_launch: false
-    scm_update_cache_timeout: "0"
-    scm_refspec: ""
-    allow_override: false
-    update_project: false
-    timeout: "0"
-...
+    scm_url: "https://github.com/mzdyb/checkpoint.git"
+    state: present

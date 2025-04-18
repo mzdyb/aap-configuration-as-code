@@ -23,7 +23,7 @@
 
     - name: Include variables from file
       ansible.builtin.include_vars:
-        file: ./aap_configuration/controller/controller_workflow_job_templates.yaml
+        file: ./aap_configuration/controller/controller_projects.yaml
 
   roles:
     - infra.aap_configuration.dispatch
