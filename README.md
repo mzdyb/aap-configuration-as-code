@@ -7,19 +7,19 @@ This repository provides an example of managing configurations for Ansible Autom
 
 ## Implementation
 
-To automate AAP version 2.5 configuration with Ansible the following collections from ansible namespace can be used:
+To automate AAP version 2.5 configuration with Ansible the following collections from ansible namespace might be used:
 - ansible.platform
 - ansible.hub
 - ansible.controller
 - ansible.eda
 
-The other approach is to use [infra.aap_configuration](https://github.com/redhat-cop/infra.aap_configuration) collection from Validated Content collections and it is the approach used in this repository. Tha big advantage of it is that we can use [infra.aap_configuration.dispatch](https://github.com/redhat-cop/infra.aap_configuration/tree/devel/roles/dispatch) role which runs throught the all AAP configuration objects and handles for us ordering required to implement them (configuration has to be implemented in sepecific order, for example to configure Job Template we have to configure Project first).
+The other approach is to use [infra.aap_configuration](https://github.com/redhat-cop/infra.aap_configuration) collection from Validated Content collections and it is the approach used in this repository. Tha big advantage of it is that we can use [infra.aap_configuration.dispatch](https://github.com/redhat-cop/infra.aap_configuration/tree/devel/roles/dispatch) role which runs throught the all AAP configuration objects and handles for us ordering required to implement them (AAP configuration has to be implemented in sepecific order, for example to configure Job Template we have to configure Project first).
 
 
-The intended state of AAP configuration is defined in the files in 'aap_configuration' folder. It is up to us if we want to keep AAP configuration in one or separate files. Depending on our needs the good practice is to keep configuration hierarchical as separate files in structured directories. If we already have configured AAP instance we can create AAP configuration files from scratch but the easier approach is to use [controller_configuration.filetree_create](https://github.com/redhat-cop/aap_configuration_extended/tree/devel/roles/filetree_create) role from [aap_configuration_extended](https://github.com/redhat-cop/aap_configuration_extended) collection. This role connects to AAP and generates configuration files for us. At the time of creating this repository there were some issues with this role during the configuration discovery (hence 'ignore_errors: true' parameter in 'gather_configuration' playbook) but still it was helpful for creating initial configuration files because it provided the general files structure.
+The intended state of AAP configuration is defined in the files in 'aap_configuration' folder. It is up to us if we want to keep AAP configuration in one file or separate files. Depending on our needs the good practice is to keep configuration hierarchical as separate files in structured directories. If we already have configured AAP instance we can create AAP configuration files from scratch but the easier approach is to use [controller_configuration.filetree_create](https://github.com/redhat-cop/aap_configuration_extended/tree/devel/roles/filetree_create) role from [aap_configuration_extended](https://github.com/redhat-cop/aap_configuration_extended) collection. This role connects to AAP and generates configuration files for us. At the time of creating this repository there were some issues with this role during the configuration discovery (hence 'ignore_errors: true' parameter in 'gather_configuration' playbook) but still it was helpful for creating initial configuration files because it provided the general files structure.
 
 
-When our data structure is defined and implemented on AAP we should make configuration changes from our SoT not directly on AAP. To add the new configuration object we are using 'state: present' variable for tasks, it is not present in configuration files in this repo because it is the default state. When we want to remove some configuration object we might use for example the following workflow:
+After our data structure is defined and implemented on AAP and we want to make configuration changes we should do it from our SoT not directly on AAP. To add the new configuration object we are using 'state: present' variable for tasks, it is not present in configuration files in this repo because it is the default state. When we want to remove some configuration object we might use for example the following workflow:
 
 Removing CaC-configured AAP configuration objects:
   1. Add `state: absent` to configuration object which we want to remove. For example:

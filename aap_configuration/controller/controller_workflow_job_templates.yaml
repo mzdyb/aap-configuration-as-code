@@ -13,13 +13,11 @@ controller_workflows:
       - "network-events slack channel"
     simplified_workflow_nodes:
       - identifier: "create incident"
-        workflow_job_template: "EDA for networks - interface status change"
         unified_job_template: "EDA for networks - create incident"
         all_parents_must_converge: "False"
         success_nodes:
           - interface recovery
       - identifier: "interface recovery"
-        workflow_job_template: "EDA for networks - interface status change"
         unified_job_template: "EDA for networks - interface recovery"
         all_parents_must_converge: "False"
         success_nodes:
@@ -27,11 +25,9 @@ controller_workflows:
         failure_nodes:
           - update incident
       - identifier: "update incident"
-        workflow_job_template: "EDA for networks - interface status change"
         unified_job_template: "EDA for networks - update incident"
         all_parents_must_converge: "False"
       - identifier: "update&close incident"
-        workflow_job_template: "EDA for networks - interface status change"
         unified_job_template: "EDA for networks - update and close incident"
         all_parents_must_converge: "False"
 
@@ -48,13 +44,11 @@ controller_workflows:
       - "network-events slack channel"
     simplified_workflow_nodes:
       - identifier: "create incident"
-        workflow_job_template: "EDA for networks - bgp network prefix configuration change"
         unified_job_template: "EDA for networks - create incident"
         all_parents_must_converge: "False"
         success_nodes:
           - enforce SoT config
       - identifier: "enforce SoT config"
-        workflow_job_template: "EDA for networks - bgp network prefix configuration change"
         unified_job_template: "EDA for networks - enforce configuration from SoT"
         all_parents_must_converge: "False"
         success_nodes:
@@ -62,11 +56,9 @@ controller_workflows:
         failure_nodes:
           - update incident
       - identifier: "update&close incident"
-        workflow_job_template: "EDA for networks - bgp network prefix configuration change"
         unified_job_template: "EDA for networks - update and close incident"
         all_parents_must_converge: "False"
       - identifier: "update incident"
-        workflow_job_template: "EDA for networks - bgp network prefix configuration change"
         unified_job_template: "EDA for networks - update incident"
         all_parents_must_converge: "False"
 
@@ -76,19 +68,16 @@ controller_workflows:
     inventory: paloalto inventory
     simplified_workflow_nodes:
       - identifier: "fw configuration"
-        workflow_job_template: "paloalto - provision fw configuration and security policies"
         unified_job_template: "paloalto - configure fw"
         all_parents_must_converge: "False"
         success_nodes:
           - fw policies
       - identifier: "fw policies"
-        workflow_job_template: "paloalto - provision fw configuration and security policies"
         unified_job_template: "paloalto - create security policies"
         all_parents_must_converge: "False"
         success_nodes:
           - commit configuration
       - identifier: "commit configuration"
-        workflow_job_template: "paloalto - provision fw configuration and security policies"
         unified_job_template: "paloalto - commit configuration"
         all_parents_must_converge: "False"
 
@@ -101,19 +90,16 @@ controller_workflows:
       fw_rules_state: absent
     simplified_workflow_nodes:
       - identifier: "remove fw policies"
-        workflow_job_template: "paloalto - deprovision fw configuration and security policies"
         unified_job_template: "paloalto - create security policies"
         all_parents_must_converge: "False"
         success_nodes:
           - remove fw configuration
       - identifier: "remove fw configuration"
-        workflow_job_template: "paloalto - deprovision fw configuration and security policies"
         unified_job_template: "paloalto - configure fw"
         all_parents_must_converge: "False"
         success_nodes:
           - commit configuration
       - identifier: "commit configuration"
-        workflow_job_template: "paloalto - deprovision fw configuration and security policies"
         unified_job_template: "paloalto - commit configuration"
         all_parents_must_converge: "False"
 
@@ -122,13 +108,11 @@ controller_workflows:
     state: "present"
     simplified_workflow_nodes:
       - identifier: "synchronize SoT"
-        workflow_job_template: "cisco aci - configure aci"
         unified_job_template: "cisco-aci"
         all_parents_must_converge: "False"
         success_nodes:
           - configure network objects
       - identifier: "configure network objects"
-        workflow_job_template: "cisco aci - configure aci"
         unified_job_template: "cisco aci - configure network objects"
         all_parents_must_converge: "False"
         success_nodes:
@@ -136,11 +120,9 @@ controller_workflows:
         failure_nodes:
           - some action if failed
       - identifier: "some action if failed"
-        workflow_job_template: "cisco aci - configure aci"
         unified_job_template: "Demo Job Template"
         all_parents_must_converge: "False"
       - identifier: "configure APs & EPGs"
-        workflow_job_template: "cisco aci - configure aci"
         unified_job_template: "cisco aci - configure APs and EPGs"
         all_parents_must_converge: "False"
         success_nodes:
@@ -148,17 +130,14 @@ controller_workflows:
         failure_nodes:
           - another action if failed
       - identifier: "another action if failed"
-        workflow_job_template: "cisco aci - configure aci"
         unified_job_template: "Demo Job Template"
         all_parents_must_converge: "False"
       - identifier: "configure filters"
-        workflow_job_template: "cisco aci - configure aci"
         unified_job_template: "cisco aci - configure filters"
         all_parents_must_converge: "False"
         success_nodes:
           - configure contracts
       - identifier: "configure contracts"
-        workflow_job_template: "cisco aci - configure aci"
         unified_job_template: "cisco aci - configure contracts"
         all_parents_must_converge: "False"
 
@@ -167,18 +146,15 @@ controller_workflows:
     state: "present"
     simplified_workflow_nodes:
       - identifier: "create objects"
-        workflow_job_template: "checkpoint - manage configuration"
         unified_job_template: "checkpoint - manage objects"
         all_parents_must_converge: "False"
         success_nodes:
           - create access rules
       - identifier: "create access rules"
-        workflow_job_template: "checkpoint - manage configuration"
         unified_job_template: "checkpoint - manage access rules"
         all_parents_must_converge: "False"
         success_nodes:
           - install policies
       - identifier: "install policies"
-        workflow_job_template: "checkpoint - manage configuration"
         unified_job_template: "checkpoint - install policies"
         all_parents_must_converge: "False"
