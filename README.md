@@ -3,11 +3,11 @@
 
 ## Overview
 
-This repository provides an example of managing configurations for Ansible Automation Platform (AAP) using a Configuration as Code (CaC) approach. It allows us to use version controling and streamlined deployment processes that align with DevOps best practices. In this case AAP configuration is described using YAML-formatted variable files and configuration deployment is automated using Ansible. These variable files are the Source of Truth (SoT) for AAP configuration which means that they define the intended state of our configuration. 
+This repository provides an example of managing configurations for Ansible Automation Platform (AAP) using a Configuration as Code (CaC) approach which allows us to use version controling and streamlined deployment processes that align with DevOps best practices. In this approach AAP configuration is described using YAML-formatted variable files and configuration deployment is automated using Ansible. These variable files are the Source of Truth (SoT) for AAP configuration which means that they define the intended state of our configuration. 
 
 ## Implementation
 
-To automate AAP version 2.5 configuration with Ansible the following collections from ansible namespace might be used:
+To automate AAP version 2.5 configuration with Ansible the following collections from ansible namespace might be used directly:
 - ansible.platform
 - ansible.hub
 - ansible.controller

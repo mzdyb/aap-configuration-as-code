@@ -1,5 +1,6 @@
 ---
 controller_templates:
+# Cisco ACI
   - name: "cisco aci - configure APs and EPGs"
     project: "cisco-aci"
     inventory: "cisco aci inventory"
@@ -43,6 +44,7 @@ controller_templates:
     job_tags: "tenants,vrfs,bds,subnets"
     state: present
 
+# Demo Job Template
   - name: "Demo Job Template"
     project: "Demo Project"
     inventory: "Demo Inventory"
@@ -52,6 +54,7 @@ controller_templates:
       - "Demo Credential"
     state: present
 
+# EDA for networks
   - name: "EDA for networks - create incident"
     project: "eda-for-networks"
     inventory: "EDA for networks inventory"
@@ -123,6 +126,7 @@ controller_templates:
       - "network-events slack channel"
     state: present
 
+# paloalto
   - name: "paloalto - basic fw operations"
     project: "paloalto"
     inventory: "paloalto inventory"
@@ -155,6 +159,7 @@ controller_templates:
     execution_environment: "ee-panos"
     state: present
 
+# checkpoint
   - name: "checkpoint - install policies"
     project: "checkpoint"
     inventory: "checkpoint inventory"

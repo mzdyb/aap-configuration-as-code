@@ -158,3 +158,41 @@ controller_workflows:
       - identifier: "install policies"
         unified_job_template: "checkpoint - install policies"
         all_parents_must_converge: "False"
+
+# F5 BIG IP
+workflow_job_templates:
+  - name: F5 BIG IP - configure infrastructure
+    organization: Default
+    state: present
+    survey_enabled: true
+    survey_spec:
+      name: ''
+      description: ''
+      spec:
+        - question_name: Provide license key
+          variable: license_key
+          type: text
+          required: false
+          default: ''
+          min: 0
+          max: 1024
+        - question_name: Do you want to enable persistence profile? (true/false)
+          variable: persistence_enabled
+          type: multiplechoice
+          required: true
+          default: 'false'
+          choices:
+            - 'true'
+            - 'false'
+    simplified_workflow_nodes:
+      - identifier: F5 initial config
+        all_parents_must_converge: false
+        unified_job_template: F5 BIG IP - initial configuration
+        success_nodes:
+          - load balancing config
+      - identifier: load balancing config
+        all_parents_must_converge: false
+        unified_job_template: F5 BIG IP - configure load balancing
+      - identifier: provision web servers
+        all_parents_must_converge: false
+        unified_job_template: F5 BIG IP - provision web servers

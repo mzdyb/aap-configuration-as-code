@@ -4,6 +4,6 @@ controller_notifications:
     organization: "Default"
     notification_type: "slack"
     notification_configuration:
-      token: "$encrypted$"
+      token: "{{ slack_token }}"
       channels: ['#network-events']
 
