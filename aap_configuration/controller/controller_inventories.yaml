@@ -1,18 +1,50 @@
 ---
 controller_inventories:
-  - name: "Demo Inventory"
-    description: ""
-    organization: "Default"
-    prevent_instance_group_fallback: False
-  - name: "EDA for networks inventory"
-    description: ""
-    organization: "Default"
-    prevent_instance_group_fallback: False
-  - name: "paloalto inventory"
-    description: ""
-    organization: "Default"
-    prevent_instance_group_fallback: False
-  - name: "cisco aci inventory"
-    description: ""
-    organization: "Default"
-    prevent_instance_group_fallback: False
+  - name: checkpoint inventory
+    organization: Default
+    sources:
+      - name: checkpoint repo
+        source: scm
+        source_project: checkpoint
+        source_path: inventory
+
+  - name: cisco aci inventory
+    organization: Default
+    sources:
+      - name: inventory file
+        source: scm
+        source_project: cisco-aci
+        source_path: inventory
+
+  - name: Demo Inventory
+    organization: Default
+    hosts:
+      - name: localhost
+        variables: |
+          ansible_connection: local
+          ansible_python_interpreter: '{{ ansible_playbook_python }}'
+
+  - name: EDA for networks inventory
+    organization: Default
+    sources:
+      - name: EDA for networks
+        source: scm
+        source_project: eda-for-networks
+        source_path: inventory
+
+  - name: f5 big ip inventory
+    organization: Default
+    sources:
+      - name: f5-big-ip repo
+        source: scm
+        source_project: f5-big-ip
+        source_path: inventory
+
+  - name: paloalto inventory
+    organization: Default
+    sources:
+      - name: paloalto source
+        source: scm
+        source_project: paloalto
+        source_path: inventory
+        credential: servicenow-instance

@@ -6,31 +6,45 @@
 This repository provides an example of managing configurations for Ansible Automation Platform (AAP) using a Configuration as Code (CaC) approach which allows us to use version controling and streamlined deployment processes that align with DevOps best practices. In this approach AAP configuration is described using YAML-formatted variable files and configuration deployment is automated using Ansible. These variable files are the Source of Truth (SoT) for AAP configuration which means that they define the intended state of our configuration. 
 
 ## Implementation
+This section details the methods used for managing AAP CaC.
 
-To automate AAP version 2.5 configuration with Ansible the following collections from ansible namespace might be used directly:
+### Configuration Approaches
+There are two primary approaches to automate AAP 2.5 configuration with Ansible. The first approach is to use the following collections from the ansible namespace directly:
 - ansible.platform
 - ansible.hub
 - ansible.controller
 - ansible.eda
 
-The other approach is to use [infra.aap_configuration](https://github.com/redhat-cop/infra.aap_configuration) collection from Validated Content collections and it is the approach used in this repository. Tha big advantage of it is that we can use [infra.aap_configuration.dispatch](https://github.com/redhat-cop/infra.aap_configuration/tree/devel/roles/dispatch) role which runs throught the all AAP configuration objects and handles for us ordering required to implement them (AAP configuration has to be implemented in sepecific order, for example to configure Job Template we have to configure Project first).
+The second approach is to use [infra.aap_configuration](https://github.com/redhat-cop/infra.aap_configuration) collection from Red Hat's Validated Content and it is the approach used in this repository. A significant advantage of this method is [infra.aap_configuration.dispatch](https://github.com/redhat-cop/infra.aap_configuration/tree/devel/roles/dispatch) role. This role iterates through all AAP configuration objects and handles the specific ordering required for their implementation (AAP configuration has to be implemented in specific order, for example a Project must be configured before a Job Template that uses it).
 
+### Defining the State of Configuration
+The intended state of the AAP configuration is defined in the files within the aap_configuration/ directory. It is a good practice to structure this configuration using multiple hierarchical files and directories depending on our needs.
 
-The intended state of AAP configuration is defined in the files in 'aap_configuration' folder. It is up to us if we want to keep AAP configuration in one file or separate files. Depending on our needs the good practice is to keep configuration hierarchical as separate files in structured directories. If we already have configured AAP instance we can create AAP configuration files from scratch but the easier approach is to use [controller_configuration.filetree_create](https://github.com/redhat-cop/aap_configuration_extended/tree/devel/roles/filetree_create) role from [aap_configuration_extended](https://github.com/redhat-cop/aap_configuration_extended) collection. This role connects to AAP and generates configuration files for us. At the time of creating this repository there were some issues with this role during the configuration discovery (hence 'ignore_errors: true' parameter in 'gather_configuration' playbook) but still it was helpful for creating initial configuration files because it provided the general files structure.
+If we already have existing&configured AAP instance we can create these configuration files from scratch but the easier method is to use [controller_configuration.filetree_create](https://github.com/redhat-cop/aap_configuration_extended/tree/devel/roles/filetree_create) role from [aap_configuration_extended](https://github.com/redhat-cop/aap_configuration_extended) collection. This role connects to AAP instance and automatically generates AAP configuration files for us. 
 
+**Note:** *At the time of writing this text there were some issues with this role's discovery process which is why 'ignore_errors: true' is used in the gather_configuration playbook. Despite this it remains a helpful tool for creating the initial file structure.*
 
-After our data structure is defined and implemented on AAP and we want to make configuration changes we should do it from our SoT not directly on AAP. To add the new configuration object we are using 'state: present' variable for task and when we want to remove some configuration we are using 'state: absent' variable. To remove configuration we might use for example the following workflow:
+### Managing Configuration Changes
+Once the initial configuration is defined and applied on AAP instance all subsequent AAP configuration changes should be made within our SoT (this repository) not directly on the AAP:
+-to add new configuration object use 'state: present' variable for the corresponding task
+-to remove existing configuration object use 'state: absent' variable
 
-Removing CaC-configured AAP configuration objects:
+Below is the example workflow for removing a configuration object managed with AAP-CaC:
   1. Add `state: absent` to configuration object which we want to remove. For example:
   ```
 aap_organizations:
   - name: "my_organization"
     state: absent
   ```
-  2. Run ansible playbook to implement configuration
+  2. Run ansible playbook to implement configuration change
   2. Verify removal in AAP UI/API
-  3. Remove 'my_organization' entry from YAML file in new commit
+  3. Remove 'my_organization' entry from YAML file in a new commit
+
+### Environment Setup
+To ensure compatibility with the new REST API object paths in Ansible Automation Platform 2.5 the following environment variable should be exported in shell session before running the playbooks:
+```
+export AWXKIT_API_BASE_PATH=/api/controller/
+```
 
 
 ## Additional resources

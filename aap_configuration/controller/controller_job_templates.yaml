@@ -2,6 +2,7 @@
 controller_templates:
 # Cisco ACI
   - name: "cisco aci - configure APs and EPGs"
+    organization: "Default"
     project: "cisco-aci"
     inventory: "cisco aci inventory"
     playbook: "configure_aci.yml"
@@ -10,6 +11,7 @@ controller_templates:
     state: present
 
   - name: "cisco aci - configure contracts"
+    organization: "Default"
     project: "cisco-aci"
     inventory: "cisco aci inventory"
     playbook: "configure_aci.yml"
@@ -27,6 +29,7 @@ controller_templates:
     state: present
 
   - name: "cisco aci - configure network objects"
+    organization: "Default"
     project: "cisco-aci"
     inventory: "cisco aci inventory"
     playbook: "configure_aci.yml"
@@ -46,6 +49,7 @@ controller_templates:
 
 # Demo Job Template
   - name: "Demo Job Template"
+    organization: "Default"
     project: "Demo Project"
     inventory: "Demo Inventory"
     playbook: "hello_world.yml"
@@ -56,6 +60,7 @@ controller_templates:
 
 # EDA for networks
   - name: "EDA for networks - create incident"
+    organization: "Default"
     project: "eda-for-networks"
     inventory: "EDA for networks inventory"
     playbook: "playbooks/manage_incident.yml"
@@ -75,7 +80,6 @@ controller_templates:
     project: "eda-for-networks"
     inventory: "EDA for networks inventory"
     playbook: "playbooks/configure_infrastructure.yml"
-    verbosity: 0
     job_type: "run"
     credentials:
       - "EDA for networks Arista credentials"
@@ -86,6 +90,7 @@ controller_templates:
     state: present
 
   - name: "EDA for networks - interface recovery"
+    organization: "Default"
     project: "eda-for-networks"
     inventory: "EDA for networks inventory"
     playbook: "playbooks/interface_recovery.yml"
@@ -99,6 +104,7 @@ controller_templates:
     state: present
 
   - name: "EDA for networks - update and close incident"
+    organization: "Default"
     project: "eda-for-networks"
     inventory: "EDA for networks inventory"
     playbook: "playbooks/manage_incident.yml"
@@ -113,6 +119,7 @@ controller_templates:
     state: present
 
   - name: "EDA for networks - update incident"
+    organization: "Default"
     project: "eda-for-networks"
     inventory: "EDA for networks inventory"
     playbook: "playbooks/manage_incident.yml"
@@ -128,6 +135,7 @@ controller_templates:
 
 # paloalto
   - name: "paloalto - basic fw operations"
+    organization: "Default"
     project: "paloalto"
     inventory: "paloalto inventory"
     playbook: "basic_fw_operations.yml"
@@ -136,6 +144,7 @@ controller_templates:
     state: present
 
   - name: "paloalto - commit configuration"
+    organization: "Default"
     project: "paloalto"
     inventory: "paloalto inventory"
     playbook: "commit_config.yml"
@@ -144,6 +153,7 @@ controller_templates:
     state: present
 
   - name: "paloalto - configure fw"
+    organization: "Default"
     project: "paloalto"
     inventory: "paloalto inventory"
     playbook: "configure_fw.yml"
@@ -152,6 +162,7 @@ controller_templates:
     state: present
 
   - name: "paloalto - create security policies"
+    organization: "Default"
     project: "paloalto"
     inventory: "paloalto inventory"
     playbook: "create_security_policies.yml"
@@ -161,6 +172,7 @@ controller_templates:
 
 # checkpoint
   - name: "checkpoint - install policies"
+    organization: "Default"
     project: "checkpoint"
     inventory: "checkpoint inventory"
     playbook: "playbooks/install_policy.yml"
@@ -168,6 +180,7 @@ controller_templates:
     state: present
   
   - name: "checkpoint - manage access rules"
+    organization: "Default"
     project: "checkpoint"
     inventory: "checkpoint inventory"
     playbook: "playbooks/manage_configuration.yml"
@@ -176,6 +189,7 @@ controller_templates:
     state: present
 
   - name: "checkpoint - manage objects"
+    organization: "Default"
     project: "checkpoint"
     inventory: "checkpoint inventory"
     playbook: "playbooks/manage_configuration.yml"
@@ -183,3 +197,68 @@ controller_templates:
     job_tags: "objects"
     state: present
 
+# F5 BIG-IP
+  - name: F5 BIG IP - configure load balancing
+    organization: Default
+    project: f5-big-ip
+    inventory: f5 big ip inventory
+    playbook: configure_big_ip.yml
+    job_type: run
+    job_tags: load_balancing
+    survey_enabled: true
+    survey:
+      spec:
+        - question_name: Do you want to enable persistence profile? (true/false)
+          variable: persistence_enabled
+          type: multiplechoice
+          choices:
+            - 'true'
+            - 'false'
+          default: 'true'
+          required: true
+    state: present
+
+  - name: F5 BIG IP - deprovision web servers
+    organization: Default
+    project: f5-big-ip
+    inventory: f5 big ip inventory
+    playbook: configure_web_servers.yml
+    job_type: run
+    job_tags: deprovision
+    survey_enabled: true
+    state: present
+
+  - name: F5 BIG IP - initial configuration
+    organization: Default
+    project: f5-big-ip
+    inventory: f5 big ip inventory
+    playbook: configure_big_ip.yml
+    job_type: run
+    job_tags: initial_configuration
+    survey_enabled: true
+    survey:
+      spec:
+        - question_name: Provide license key
+          variable: license_key
+          type: text
+          required: false
+    state: present
+
+  - name: F5 BIG IP - provision web servers
+    organization: Default
+    project: f5-big-ip
+    inventory: f5 big ip inventory
+    playbook: configure_web_servers.yml
+    job_type: run
+    job_tags: provision
+    survey_enabled: true
+    state: present
+
+  - name: F5 BIG IP - reset configuration
+    organization: Default
+    project: f5-big-ip
+    inventory: f5 big ip inventory
+    playbook: reset_big_ip_configuration.yml
+    job_type: run
+    survey_enabled: true
+    state: present

@@ -1,36 +1,38 @@
 ---
 controller_projects:
-  - name: "Demo Project"
-    organization: "Default"
-    default_environment: 
-    scm_type: "git"
-    scm_url: "https://github.com/ansible/ansible-tower-samples"
-    state: present
+  - name: Demo Project
+    organization: Default
+    scm_type: git
+    scm_url: https://github.com/ansible/ansible-tower-samples
 
-  - name: "eda-for-networks"
-    organization: "Default"
+  - name: eda-for-networks
+    organization: Default
+    scm_type: git
+    scm_url: https://github.com/mzdyb/event-driven-ansible-for-networks.git
     default_environment: ee-network
-    scm_type: "git"
-    scm_url: "https://github.com/mzdyb/event-driven-ansible-for-networks.git"
-    state: present
 
-  - name: "paloalto"
-    organization: "Default"
+  - name: paloalto
+    organization: Default
+    scm_type: git
+    scm_url: https://github.com/mzdyb/paloalto.git
     default_environment: ee-panos
-    scm_type: "git"
-    scm_url: "https://github.com/mzdyb/paloalto.git"
-    state: present
 
-  - name: "cisco-aci"
-    organization: "Default"
+  - name: cisco-aci
+    organization: Default
+    scm_type: git
+    scm_url: https://github.com/mzdyb/cisco-aci.git
     default_environment: ee-network-aci
-    scm_type: "git"
-    scm_url: "https://github.com/mzdyb/cisco-aci.git"
-    state: present
 
-  - name: "checkpoint"
-    organization: "Default"
+  - name: checkpoint
+    organization: Default
+    scm_type: git
+    scm_url: https://github.com/mzdyb/checkpoint.git
     default_environment: ee-network-checkpoint
-    scm_type: "git"
-    scm_url: "https://github.com/mzdyb/checkpoint.git"
-    state: present
+
+  - name: f5-big-ip
+    organization: Default
+    scm_type: git
+    scm_url: https://github.com/mzdyb/F5-BIG-IP.git
+    default_environment: ee-network
+    scm_clean: true
+    scm_delete_on_update: true

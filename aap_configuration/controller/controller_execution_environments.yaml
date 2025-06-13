@@ -1,33 +1,41 @@
 ---
 controller_execution_environments:
-  - name: "Hub Minimal execution environment"
-    image: "aap.rh.lab/ee-minimal-rhel8:latest"
-    pull: ""
+  - name: ee-network-checkpoint
+    image: aap.rh.lab/ee-network-checkpoint:1.0
+    organization: Default
+    pull: missing
 
-  - name: "Hub Default execution environment"
-    image: "aap.rh.lab/ee-supported-rhel8:latest"
-    pull: ""
+  - name: ee-network-aci
+    image: aap.rh.lab/ee-network-aci:1.0
+    organization: null
+    pull: missing
 
-  - name: "Minimal execution environment"
-    image: "registry.redhat.io/ansible-automation-platform-25/ee-minimal-rhel8:latest"
-    pull: ""
+  - name: ee-panos
+    image: aap.rh.lab/ee-panos:1.4
+    organization: null
+    pull: missing
 
-  - name: "Default execution environment"
-    image: "registry.redhat.io/ansible-automation-platform-25/ee-supported-rhel8:latest"
-    pull: ""
+  - name: ee-network
+    image: aap.rh.lab/ee-network:1.8
+    organization: null
+    pull: missing
 
-  - name: "Control Plane Execution Environment"
-    image: "registry.redhat.io/ansible-automation-platform-25/ee-supported-rhel8:latest"
-    pull: ""
+  - name: Default execution environment
+    image: registry.redhat.io/ansible-automation-platform-25/ee-supported-rhel8:latest
+    organization: null
+    pull: ''
 
-  - name: "ee-network"
-    image: "aap.rh.lab/ee-network:1.8"
-    pull: "missing"
+  - name: Minimal execution environment
+    image: registry.redhat.io/ansible-automation-platform-25/ee-minimal-rhel8:latest
+    organization: null
+    pull: ''
 
-  - name: "ee-panos"
-    image: "aap.rh.lab/ee-panos:1.4"
-    pull: "missing"
- 
-  - name: "ee-network-aci"
-    image: "aap.rh.lab/ee-network-aci:1.0"
-    pull: "missing"
+  - name: Hub Default execution environment
+    image: aap.rh.lab/ee-supported-rhel8:latest
+    organization: null
+    pull: ''
+
+  - name: Hub Minimal execution environment
+    image: aap.rh.lab/ee-minimal-rhel8:latest
+    organization: null
+    pull: ''
