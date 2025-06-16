@@ -207,6 +207,8 @@ controller_templates:
     job_tags: load_balancing
     survey_enabled: true
     survey:
+      name: ''
+      description: ''
       spec:
         - question_name: Do you want to enable persistence profile? (true/false)
           variable: persistence_enabled
@@ -237,6 +239,8 @@ controller_templates:
     job_tags: initial_configuration
     survey_enabled: true
     survey:
+      name: ''
+      description: ''
       spec:
         - question_name: Provide license key
           variable: license_key

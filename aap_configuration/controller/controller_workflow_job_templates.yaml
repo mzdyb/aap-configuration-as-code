@@ -159,12 +159,13 @@ controller_workflows:
         unified_job_template: "checkpoint - install policies"
         all_parents_must_converge: "False"
 
-workflow_job_templates:
   - name: F5 BIG IP - configure infrastructure
     organization: Default
     state: present
     survey_enabled: true
     survey:
+      name: ''
+      description: ''
       spec:
         - question_name: Provide license key
           variable: license_key

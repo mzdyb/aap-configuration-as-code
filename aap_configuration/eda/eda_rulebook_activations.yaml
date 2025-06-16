@@ -1,0 +1,11 @@
+---
+eda_rulebook_activations:
+  - name: Automatic network issues recovery
+    organization: Default
+    project: eda-for-networks
+    rulebook: network-recovery.yml
+    decision_environment: my-decision-environment
+    eda_credentials: AAP
+    restart_policy: never
+    enabled: false
+    state: present
