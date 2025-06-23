@@ -1,4 +1,3 @@
-# ...draft...in progress...
 # Ansible Automation Platform Configuration as Code: Automating the Automation
 
 ## Overview
@@ -37,14 +36,7 @@ aap_organizations:
     state: absent
   ```
   2. Run ansible playbook to implement configuration change
-  2. Verify removal in AAP UI/API
   3. Remove 'my_organization' entry from YAML file in a new commit
-
-### Environment Setup for awxtool ...draft...
-To ensure compatibility with the new REST API object paths in Ansible Automation Platform 2.5 the following environment variable should be exported in shell session before running the playbooks:
-```
-export AWXKIT_API_BASE_PATH=/api/controller/
-```
 
 ## Additional resources
 - [ansible-automation-controller-cac-gitops](https://www.redhat.com/en/blog/ansible-automation-controller-cac-gitops)

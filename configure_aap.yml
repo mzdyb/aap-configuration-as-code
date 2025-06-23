@@ -21,12 +21,13 @@
         file: ./secret_vars
       no_log: true
 
-    - name: Include AAP configuration variables
-      ansible.builtin.include_vars:
-        dir: ./aap_configuration
-
-    # - name: Include variables from file
+    # - name: Include AAP configuration variables
     #   ansible.builtin.include_vars:
-    #     file: ./aap_configuration/controller/controller_workflow_job_templates.yaml
+    #     dir: ./aap_configuration
+
+    - name: Include variables from file
+      ansible.builtin.include_vars:
+        file: ./aap_configuration/eda/eda_rulebook_activations.yaml
+
   roles:
     - infra.aap_configuration.dispatch

@@ -7,5 +7,4 @@ eda_rulebook_activations:
     decision_environment: my-decision-environment
     eda_credentials: AAP
     restart_policy: never
-    enabled: false
-    state: present
+    state: disabled
