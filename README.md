@@ -25,8 +25,8 @@ If we already have existing&configured AAP instance we can create these configur
 
 ### Managing Configuration Changes
 Once the initial configuration is defined and applied on AAP instance all further AAP configuration changes should be made within our SoT (this repository) not directly on the AAP:
--to add new configuration object use 'state: present' variable for the corresponding task
--to remove existing configuration object use 'state: absent' variable
+- to add new configuration object use 'state: present' variable for the corresponding task
+- to remove existing configuration object use 'state: absent' variable
 
 Below is the example workflow for removing a configuration object managed with AAP-CaC:
   1. Add `state: absent` to configuration object which we want to remove. For example:
