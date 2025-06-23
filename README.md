@@ -21,10 +21,10 @@ The intended state of the AAP configuration is defined in the files within the a
 
 If we already have existing&configured AAP instance we can create these configuration files from scratch but the easier method is to use [controller_configuration.filetree_create](https://github.com/redhat-cop/aap_configuration_extended/tree/devel/roles/filetree_create) role from [aap_configuration_extended](https://github.com/redhat-cop/aap_configuration_extended) collection. This role connects to AAP instance and automatically generates AAP configuration files for us. 
 
-**Note:** *At the time of writing this text there were some issues with this role's discovery process which is why 'ignore_errors: true' is used in the gather_configuration playbook. Despite this it remains a helpful tool for creating the initial file structure.*
+**Note:** *At the time of writing this text there were some issues with this role's configuration discovery process which is why 'ignore_errors: true' is used in the gather_configuration playbook. Despite this it remains a helpful tool for creating the initial file structure.*
 
 ### Managing Configuration Changes
-Once the initial configuration is defined and applied on AAP instance all subsequent AAP configuration changes should be made within our SoT (this repository) not directly on the AAP:
+Once the initial configuration is defined and applied on AAP instance all further AAP configuration changes should be made within our SoT (this repository) not directly on the AAP:
 -to add new configuration object use 'state: present' variable for the corresponding task
 -to remove existing configuration object use 'state: absent' variable
 
