@@ -46,6 +46,8 @@ There are a number of ways to securely store credentials for Ansible automation.
         file: ./secret_vars
       no_log: true
 ```
+Depending on how the automation is implemented alternative approaches include using external secret management systems like HashiCorp Vault or creating credentials in AAP.
+
 
 ## Additional resources
 - [ansible-automation-controller-cac-gitops](https://www.redhat.com/en/blog/ansible-automation-controller-cac-gitops)
