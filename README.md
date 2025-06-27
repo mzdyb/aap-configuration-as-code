@@ -38,6 +38,15 @@ aap_organizations:
   2. Run ansible playbook to implement configuration change
   3. Remove 'my_organization' entry from YAML file in a new commit
 
+### Managing credentials
+There are a number of ways to securely store credentials for Ansible automation. In this demo project sensitive data like passwords and API keys are stored locally in a file named secret_vars. This file is encrypted using ansible-vault and has its file permissions set to 600 for security. The secrets are then loaded during the playbook's execution using the ansible.builtin.include_vars module:
+```
+    - name: Include credentials from file
+      ansible.builtin.include_vars:
+        file: ./secret_vars
+      no_log: true
+```
+
 ## Additional resources
 - [ansible-automation-controller-cac-gitops](https://www.redhat.com/en/blog/ansible-automation-controller-cac-gitops)
 - [automation-controller-active-passive-architecture-cac](https://www.redhat.com/en/blog/automation-controller-active-passive-architecture-cac)
