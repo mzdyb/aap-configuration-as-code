@@ -7,6 +7,11 @@
     # aap_username: "{{ vault_aap_username | default(lookup('env', 'CONTROLLER_USERNAME')) }}"
     # aap_password: "{{ vault_aap_password | default(lookup('env', 'CONTROLLER_PASSWORD')) }}"
     # aap_hostname: "{{ vault_aap_hostname | default(lookup('env', 'CONTROLLER_HOST')) }}"
+    #
+    # Uncomment for debugging purposes:
+    # aap_configuration_secure_logging: false
+    # controller_configuration_secure_logging: false
+    # controller_credentials_secure_logging: false
 
   pre_tasks:
     - name: Include credentials from file

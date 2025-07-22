@@ -28,3 +28,13 @@ controller_inventory_sources:
     inventory: "cisco aci inventory"
     update_on_launch: "False"
     overwrite: "False"
+
+  - name: "arista-avd-aap source"
+    description: ""
+    organization: "Default"
+    source: "scm"
+    source_project: "arista-avd-aap"
+    source_path: "inventory"
+    inventory: "arista-avd-aap inventory"
+    update_on_launch: "False"
+    overwrite: "False"

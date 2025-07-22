@@ -194,3 +194,16 @@ controller_workflows:
       - identifier: provision web servers
         all_parents_must_converge: false
         unified_job_template: F5 BIG IP - provision web servers
+
+  - name: "Arista AVD - build, deploy and validate operational states"
+    organization: "Default"
+    state: "present"
+    simplified_workflow_nodes:
+      - identifier: "build and deploy configuration"
+        unified_job_template: "Arista AVD - build and deploy configuration"
+        all_parents_must_converge: "False"
+        success_nodes:
+          - validate operational states
+      - identifier: "validate operational states"
+        unified_job_template: "Arista AVD - validate devices operational states"
+        all_parents_must_converge: "False"

@@ -1,5 +1,10 @@
 ---
 controller_execution_environments:
+  - name: ee-arista-avd
+    image: aap.rh.lab/ee-arista-avd:1.0
+    organization: Default
+    pull: missing
+
   - name: ee-network-checkpoint
     image: aap.rh.lab/ee-network-checkpoint:1.0
     organization: Default

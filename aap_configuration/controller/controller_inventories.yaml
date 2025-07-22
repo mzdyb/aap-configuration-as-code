@@ -48,3 +48,11 @@ controller_inventories:
         source_project: paloalto
         source_path: inventory
         credential: servicenow-instance
+
+  - name: arista-avd-aap inventory
+    organization: Default
+    sources:
+      - name: arista-avd-aap source
+        source: scm
+        source_project: arista-avd-aap
+        source_path: inventory

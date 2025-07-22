@@ -36,3 +36,12 @@ controller_projects:
     default_environment: ee-network
     scm_clean: true
     scm_delete_on_update: true
+
+  - name: arista-avd-aap
+    organization: Default
+    scm_type: git
+    scm_url: https://github.com/mzdyb/avd-aap.git
+    default_environment: ee-arista-avd
+    scm_clean: true
+    scm_delete_on_update: true
+    scm_update_on_launch: true

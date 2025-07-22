@@ -266,3 +266,25 @@ controller_templates:
     job_type: run
     survey_enabled: true
     state: present
+
+# Arista AVD
+
+  - name: Arista AVD - build and deploy configuration
+    organization: Default
+    project: arista-avd-aap
+    inventory: arista-avd-aap inventory
+    playbook: playbooks/build-deploy-with-scm.yml
+    credentials:
+      - "github pat avd-aap"
+    job_type: run
+    state: present
+
+  - name: Arista AVD - validate devices operational states
+    organization: Default
+    project: arista-avd-aap
+    inventory: arista-avd-aap inventory
+    playbook: playbooks/network-validation-with-scm.yml
+    credentials:
+      - "github pat avd-aap"
+    job_type: run
+    state: present
