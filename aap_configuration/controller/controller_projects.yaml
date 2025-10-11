@@ -50,7 +50,7 @@ controller_projects:
     organization: Default
     scm_type: git
     scm_url: https://github.com/mzdyb/network-configuration-as-code.git
-    default_environment: ee-network
+    default_environment: ansible-automation-platform-25/ee-supported-rhel9
     scm_clean: true
     scm_delete_on_update: true
     scm_update_on_launch: true
