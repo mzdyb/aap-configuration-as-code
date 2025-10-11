@@ -38,3 +38,13 @@ controller_inventory_sources:
     inventory: "arista-avd-aap inventory"
     update_on_launch: "False"
     overwrite: "False"
+
+  - name: "network-cac source"
+    description: ""
+    organization: "Default"
+    source: "scm"
+    source_project: "network-cac"
+    source_path: "inventory"
+    inventory: "network-cac inventory"
+    update_on_launch: "False"
+    overwrite: "False"

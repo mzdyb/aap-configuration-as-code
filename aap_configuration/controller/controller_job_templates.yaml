@@ -288,3 +288,21 @@ controller_templates:
       - "github pat avd-aap"
     job_type: run
     state: present
+
+# Network CaC
+
+  - name: Network CaC - deploy configuration with Network Resource modules
+    organization: Default
+    project: network-cac
+    inventory: network-cac inventory
+    playbook: playbooks/deploy_config_with_resource_modules.yml
+    job_type: run
+    state: present
+
+  - name: Network CaC - deploy configuration with Config modules
+    organization: Default
+    project: network-cac
+    inventory: network-cac inventory
+    playbook: playbooks/deploy_config_with_config_module.yml
+    job_type: run
+    state: present

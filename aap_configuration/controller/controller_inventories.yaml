@@ -56,3 +56,11 @@ controller_inventories:
         source: scm
         source_project: arista-avd-aap
         source_path: inventory
+
+  - name: network-cac inventory
+    organization: Default
+    sources:
+      - name: network-cac source
+        source: scm
+        source_project: network-cac
+        source_path: inventory

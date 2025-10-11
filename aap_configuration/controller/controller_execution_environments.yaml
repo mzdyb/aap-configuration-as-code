@@ -25,6 +25,11 @@ controller_execution_environments:
     organization: null
     pull: missing
 
+  - name: ansible-automation-platform-25/ee-supported-rhel9
+    image: registry.redhat.io/ansible-automation-platform-25/ee-supported-rhel8:latest
+    organization: null
+    pull: missing
+
   - name: Default execution environment
     image: registry.redhat.io/ansible-automation-platform-25/ee-supported-rhel8:latest
     organization: null

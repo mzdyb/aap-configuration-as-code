@@ -45,3 +45,12 @@ controller_projects:
     scm_clean: true
     scm_delete_on_update: true
     scm_update_on_launch: true
+
+  - name: network-cac
+    organization: Default
+    scm_type: git
+    scm_url: https://github.com/mzdyb/network-configuration-as-code.git
+    default_environment: ee-network
+    scm_clean: true
+    scm_delete_on_update: true
+    scm_update_on_launch: true

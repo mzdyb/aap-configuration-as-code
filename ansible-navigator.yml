@@ -4,7 +4,7 @@ ansible-navigator:
     config:
       path: ansible.cfg
   execution-environment:
-    image: hub.rh.lab/ee-aap-cac:1.0
+    image: aap.rh.lab/ee-aap-cac:1.0
     pull:
       policy: missing
   playbook-artifact:

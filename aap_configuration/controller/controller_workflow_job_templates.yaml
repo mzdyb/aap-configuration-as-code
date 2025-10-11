@@ -198,6 +198,7 @@ controller_workflows:
   - name: "Arista AVD - build, deploy and validate operational states"
     organization: "Default"
     state: "present"
+    webhook_service: 'github'
     simplified_workflow_nodes:
       - identifier: "build and deploy configuration"
         unified_job_template: "Arista AVD - build and deploy configuration"
