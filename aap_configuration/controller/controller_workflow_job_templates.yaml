@@ -213,6 +213,7 @@ controller_workflows:
   - name: "Network CaC - deploy configuration with Network Resource modules workflow"
     organization: "Default"
     state: "present"
+    webhook_service: 'github'
     simplified_workflow_nodes:
       - identifier: "synchronize SoT"
         unified_job_template: "network-cac"
@@ -226,6 +227,7 @@ controller_workflows:
   - name: "Network CaC - deploy configuration with Config modules workflow"
     organization: "Default"
     state: "present"
+    webhook_service: 'github'
     simplified_workflow_nodes:
       - identifier: "synchronize SoT"
         unified_job_template: "network-cac"
