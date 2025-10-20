@@ -208,3 +208,30 @@ controller_workflows:
       - identifier: "validate operational states"
         unified_job_template: "Arista AVD - validate devices operational states"
         all_parents_must_converge: "False"
+
+
+  - name: "Network CaC - deploy configuration with Network Resource modules workflow"
+    organization: "Default"
+    state: "present"
+    simplified_workflow_nodes:
+      - identifier: "synchronize SoT"
+        unified_job_template: "network-cac"
+        all_parents_must_converge: "False"
+        success_nodes:
+          - deploy configuration
+      - identifier: "deploy configuration"
+        unified_job_template: "Network CaC - deploy configuration with Network Resource modules"
+        all_parents_must_converge: "False"
+
+  - name: "Network CaC - deploy configuration with Config modules workflow"
+    organization: "Default"
+    state: "present"
+    simplified_workflow_nodes:
+      - identifier: "synchronize SoT"
+        unified_job_template: "network-cac"
+        all_parents_must_converge: "False"
+        success_nodes:
+          - deploy configuration
+      - identifier: "deploy configuration"
+        unified_job_template: "Network CaC - deploy configuration with Config modules"
+        all_parents_must_converge: "False"
