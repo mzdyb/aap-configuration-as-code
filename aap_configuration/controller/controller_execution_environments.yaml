@@ -25,27 +25,20 @@ controller_execution_environments:
     organization: null
     pull: missing
 
-  - name: ansible-automation-platform-25/ee-supported-rhel9
+  - name: ansible-automation-platform-25/ee-supported-rhel8
     image: registry.redhat.io/ansible-automation-platform-25/ee-supported-rhel8:latest
     organization: null
     pull: missing
+    credential: registry.redhat.io
 
-  - name: Default execution environment
-    image: registry.redhat.io/ansible-automation-platform-25/ee-supported-rhel8:latest
+  - name: ansible-automation-platform-25/ee-supported-rhel9
+    image: registry.redhat.io/ansible-automation-platform-25/ee-supported-rhel9:latest
     organization: null
-    pull: ''
+    pull: missing
+    credential: registry.redhat.io
 
-  - name: Minimal execution environment
+
+  - name: ansible-automation-platform-25/ee-minimal-rhel8
     image: registry.redhat.io/ansible-automation-platform-25/ee-minimal-rhel8:latest
-    organization: null
-    pull: ''
-
-  - name: Hub Default execution environment
-    image: aap.rh.lab/ee-supported-rhel8:latest
-    organization: null
-    pull: ''
-
-  - name: Hub Minimal execution environment
-    image: aap.rh.lab/ee-minimal-rhel8:latest
     organization: null
     pull: ''
