@@ -54,3 +54,13 @@ controller_projects:
     scm_clean: no
     scm_delete_on_update: no
     scm_update_on_launch: no
+
+  - name: infoblox
+    organization: Default
+    scm_type: git
+    scm_url: https://github.com/mzdyb/infoblox.git
+    default_environment: aap.rh.lab/ee-infoblox
+    # credential: "github pat"
+    scm_clean: no
+    scm_delete_on_update: no
+    scm_update_on_launch: no

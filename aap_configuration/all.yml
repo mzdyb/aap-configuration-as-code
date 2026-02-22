@@ -1,3 +1,4 @@
 ---
-# aap_configuration_enforce_defaults: true
+aap_configuration_enforce_defaults: true
+controller_configuration_instance_groups_enforce_defaults: false
 aap_configuration_collect_logs: true # playbook will run to completion (it won't stop on the error)
