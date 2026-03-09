@@ -237,3 +237,41 @@ controller_workflows:
       - identifier: "deploy configuration"
         unified_job_template: "Network CaC - deploy configuration with Config modules"
         all_parents_must_converge: "False"
+
+  - name: "infoblox - DDI infrastructure workflow"
+    organization: "Default"
+    state: "present"
+    webhook_service: 'github'
+    simplified_workflow_nodes:
+      - identifier: "synchronize SoT"
+        unified_job_template: "infoblox"
+        all_parents_must_converge: "False"
+        success_nodes:
+          - setup infrastructure
+      - identifier: "setup infrastructure"
+        unified_job_template: "infoblox - setup infrastructure"
+        all_parents_must_converge: "False"
+        success_nodes:
+          - verify infrastructure
+      - identifier: "verify infrastructure"
+        unified_job_template: "infoblox - verify infrastructure"
+        all_parents_must_converge: "False"
+
+  - name: "infoblox - DDI workload workflow"
+    organization: "Default"
+    state: "present"
+    webhook_service: 'github'
+    simplified_workflow_nodes:
+      - identifier: "synchronize SoT"
+        unified_job_template: "infoblox"
+        all_parents_must_converge: "False"
+        success_nodes:
+          - provision workloads
+      - identifier: "provision workloads"
+        unified_job_template: "infoblox - provision workloads"
+        all_parents_must_converge: "False"
+        success_nodes:
+          - verify workloads
+      - identifier: "verify workloads"
+        unified_job_template: "infoblox - verify workloads"
+        all_parents_must_converge: "False"

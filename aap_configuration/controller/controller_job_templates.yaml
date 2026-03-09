@@ -306,3 +306,48 @@ controller_templates:
     playbook: playbooks/deploy_config_with_config_module.yml
     job_type: run
     state: present
+
+# Infoblox
+  - name: "infoblox - setup infrastructure"
+    organization: Default
+    project: infoblox
+    inventory: infoblox inventory
+    playbook: playbooks/infrastructure_setup.yml
+    execution_environment: aap.rh.lab/ee-infoblox
+    job_type: run
+    credentials:
+      - "Infoblox Portal"
+    state: present
+
+  - name: "infoblox - verify infrastructure"
+    organization: Default
+    project: infoblox
+    inventory: infoblox inventory
+    playbook: playbooks/infrastructure_verify.yml
+    execution_environment: aap.rh.lab/ee-infoblox
+    job_type: run
+    credentials:
+      - "Infoblox Portal"
+    state: present
+
+  - name: "infoblox - provision workloads"
+    organization: Default
+    project: infoblox
+    inventory: infoblox inventory
+    playbook: playbooks/workload_provision.yml
+    execution_environment: aap.rh.lab/ee-infoblox
+    job_type: run
+    credentials:
+      - "Infoblox Portal"
+    state: present
+
+  - name: "infoblox - verify workloads"
+    organization: Default
+    project: infoblox
+    inventory: infoblox inventory
+    playbook: playbooks/workload_verify.yml
+    execution_environment: aap.rh.lab/ee-infoblox
+    job_type: run
+    credentials:
+      - "Infoblox Portal"
+    state: present

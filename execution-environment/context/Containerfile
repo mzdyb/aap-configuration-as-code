@@ -1,0 +1,93 @@
+ARG EE_BASE_IMAGE="registry.redhat.io/ansible-automation-platform-25/ee-minimal-rhel9:latest"
+ARG PYCMD="/usr/bin/python3.11"
+ARG PKGMGR_PRESERVE_CACHE=""
+ARG ANSIBLE_GALAXY_CLI_COLLECTION_OPTS=""
+ARG ANSIBLE_GALAXY_CLI_ROLE_OPTS=""
+ARG PKGMGR="/usr/bin/microdnf"
+
+# Base build stage
+FROM $EE_BASE_IMAGE AS base
+USER root
+ENV PIP_BREAK_SYSTEM_PACKAGES=1
+ARG EE_BASE_IMAGE
+ARG PYCMD
+ARG PKGMGR_PRESERVE_CACHE
+ARG ANSIBLE_GALAXY_CLI_COLLECTION_OPTS
+ARG ANSIBLE_GALAXY_CLI_ROLE_OPTS
+ARG PKGMGR
+
+COPY _build/scripts/ /output/scripts/
+COPY _build/scripts/entrypoint /opt/builder/bin/entrypoint
+RUN /output/scripts/pip_install $PYCMD
+
+# Galaxy build stage
+FROM base AS galaxy
+ARG EE_BASE_IMAGE
+ARG PYCMD
+ARG PKGMGR_PRESERVE_CACHE
+ARG ANSIBLE_GALAXY_CLI_COLLECTION_OPTS
+ARG ANSIBLE_GALAXY_CLI_ROLE_OPTS
+ARG PKGMGR
+
+ADD _build/configs/ansible.cfg ~/.ansible.cfg
+COPY _build/collections /tmp
+ENV ANSIBLE_GALAXY_SERVER_LIST=certified_content,validated_content,galaxy
+ENV ANSIBLE_GALAXY_SERVER_CERTIFIED_CONTENT_URL=https://console.redhat.com/api/automation-hub/content/published/
+ENV ANSIBLE_GALAXY_SERVER_CERTIFIED_CONTENT_AUTH_URL=https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token
+ARG ANSIBLE_GALAXY_SERVER_CERTIFIED_CONTENT_TOKEN
+ENV ANSIBLE_GALAXY_SERVER_VALIDATED_CONTENT_URL=https://console.redhat.com/api/automation-hub/content/validated/
+ENV ANSIBLE_GALAXY_SERVER_VALIDATED_CONTENT_AUTH_URL=https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token
+ARG ANSIBLE_GALAXY_SERVER_VALIDATED_CONTENT_TOKEN
+ENV ANSIBLE_GALAXY_SERVER_GALAXY_URL=https://galaxy.ansible.com/
+RUN /output/scripts/check_galaxy
+COPY _build /build
+WORKDIR /build
+
+RUN mkdir -p /usr/share/ansible
+RUN ansible-galaxy role install $ANSIBLE_GALAXY_CLI_ROLE_OPTS -r requirements.yml --roles-path "/usr/share/ansible/roles"
+RUN ANSIBLE_GALAXY_DISABLE_GPG_VERIFY=1 ansible-galaxy collection install $ANSIBLE_GALAXY_CLI_COLLECTION_OPTS -r requirements.yml --collections-path "/usr/share/ansible/collections"
+
+# Builder build stage
+FROM base AS builder
+ENV PIP_BREAK_SYSTEM_PACKAGES=1
+WORKDIR /build
+ARG EE_BASE_IMAGE
+ARG PYCMD
+ARG PKGMGR_PRESERVE_CACHE
+ARG ANSIBLE_GALAXY_CLI_COLLECTION_OPTS
+ARG ANSIBLE_GALAXY_CLI_ROLE_OPTS
+ARG PKGMGR
+
+RUN $PYCMD -m pip install --no-cache-dir bindep pyyaml packaging
+
+COPY --from=galaxy /usr/share/ansible /usr/share/ansible
+
+COPY _build/bindep.txt bindep.txt
+RUN $PYCMD /output/scripts/introspect.py introspect --user-bindep=bindep.txt --write-bindep=/tmp/src/bindep.txt --write-pip=/tmp/src/requirements.txt
+RUN /output/scripts/assemble
+
+# Final build stage
+FROM base AS final
+ENV PIP_BREAK_SYSTEM_PACKAGES=1
+ARG EE_BASE_IMAGE
+ARG PYCMD
+ARG PKGMGR_PRESERVE_CACHE
+ARG ANSIBLE_GALAXY_CLI_COLLECTION_OPTS
+ARG ANSIBLE_GALAXY_CLI_ROLE_OPTS
+ARG PKGMGR
+
+RUN /output/scripts/check_ansible $PYCMD
+
+COPY --from=galaxy /usr/share/ansible /usr/share/ansible
+
+COPY --from=builder /output/ /output/
+RUN /output/scripts/install-from-bindep && rm -rf /output/wheels
+RUN chmod ug+rw /etc/passwd
+RUN mkdir -p /runner && chgrp 0 /runner && chmod -R ug+rwx /runner
+WORKDIR /runner
+RUN $PYCMD -m pip install --no-cache-dir 'dumb-init==1.2.5'
+RUN rm -rf /output
+LABEL ansible-execution-environment=true
+USER 1000
+ENTRYPOINT ["/opt/builder/bin/entrypoint", "dumb-init"]
+CMD ["bash"]

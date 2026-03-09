@@ -48,3 +48,13 @@ controller_inventory_sources:
     inventory: "network-cac inventory"
     update_on_launch: "False"
     overwrite: "False"
+
+  - name: "infoblox source"
+    description: ""
+    organization: "Default"
+    source: "scm"
+    source_project: "infoblox"
+    source_path: "inventory"
+    inventory: "infoblox inventory"
+    update_on_launch: "False"
+    overwrite: "False"

@@ -64,3 +64,11 @@ controller_inventories:
         source: scm
         source_project: network-cac
         source_path: inventory
+
+  - name: infoblox inventory
+    organization: Default
+    sources:
+      - name: infoblox source
+        source: scm
+        source_project: infoblox
+        source_path: inventory

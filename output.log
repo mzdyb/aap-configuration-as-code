@@ -1,0 +1,12 @@
+[1;35m[WARNING]: Skipping unexpected key (localhost) in group (hosts), only "vars", "children" and "hosts" are valid[0m
+[1;35m[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'[0m
+[KeyJ1dWlkIjogImRlMjI2NGZlLWZjOWEtNDRiZS04OTQyLTc4NGE1NGE3NDJiZCJ9[64D[K[Ke30=[4D[K[KeyJ1dWlkIjogImU2MTE4MDdmLTgzZDItNTk3Ni1lN2Q5LTAwMDAwMDAwMDAwMSJ9[64D[K
+PLAY [Configure AAP] ********************************************************************************************************************************************************************
+[Ke30=[4D[K[KeyJ1dWlkIjogImU2MTE4MDdmLTgzZDItNTk3Ni1lN2Q5LTAwMDAwMDAwMDAxMiJ9[64D[K
+TASK [Include credentials from file] ****************************************************************************************************************************************************
+[Ke30=[4D[K[KeyJ1dWlkIjogIjQ5YjU2MzIzLWQ4NTQtNDJjMC1hMmRiLTdjMThiZjUxMTNiMSJ9[64D[K[Ke30=[4D[K[KeyJ1dWlkIjogIjU2Y2Q4YTQ5LTdmODUtNDhiZC05MzExLWRmZWFlZDhkMTZmMSJ9[64D[K[0;31mfatal: [localhost]: FAILED! => {"censored": "the output has been hidden due to the fact that 'no_log: true' was specified for this result", "changed": false}[0m
+[Ke30=[4D[K[KeyJ1dWlkIjogIjE1Zjk0ZGVkLTRkOTUtNGNjMS1hZThjLWM4ZGIxNmMwZGQxZiJ9[64D[K
+PLAY RECAP ******************************************************************************************************************************************************************************
+[0;31mlocalhost[0m                  : ok=0    changed=0    unreachable=0    [0;31mfailed=1   [0m skipped=0    rescued=0    ignored=0   
+
+[Ke30=[4D[KPlease review the log for errors.
