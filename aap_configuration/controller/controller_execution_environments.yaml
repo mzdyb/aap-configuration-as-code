@@ -44,6 +44,6 @@ controller_execution_environments:
     pull: ''
 
   - name: aap.rh.lab/ee-infoblox
-    image: aap.rh.lab/ee-infoblox:latest
+    image: aap.rh.lab/ee-infoblox:2.0
     organization: null
     pull: missing
