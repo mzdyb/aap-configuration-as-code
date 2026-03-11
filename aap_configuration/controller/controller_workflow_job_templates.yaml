@@ -243,14 +243,19 @@ controller_workflows:
     state: "present"
     webhook_service: 'github'
     simplified_workflow_nodes:
-      - identifier: "synchronize SoT"
+      - identifier: "synchronize repository"
         unified_job_template: "infoblox"
+        all_parents_must_converge: "False"
+        success_nodes:
+          - setup infrastructure
+      - identifier: "synchronize inventory"
+        unified_job_template: "infoblox source"
         all_parents_must_converge: "False"
         success_nodes:
           - setup infrastructure
       - identifier: "setup infrastructure"
         unified_job_template: "infoblox - setup infrastructure"
-        all_parents_must_converge: "False"
+        all_parents_must_converge: "True"
         success_nodes:
           - verify infrastructure
       - identifier: "verify infrastructure"
@@ -262,14 +267,19 @@ controller_workflows:
     state: "present"
     webhook_service: 'github'
     simplified_workflow_nodes:
-      - identifier: "synchronize SoT"
+      - identifier: "synchronize repository"
         unified_job_template: "infoblox"
+        all_parents_must_converge: "False"
+        success_nodes:
+          - provision workloads
+      - identifier: "synchronize inventory"
+        unified_job_template: "infoblox source"
         all_parents_must_converge: "False"
         success_nodes:
           - provision workloads
       - identifier: "provision workloads"
         unified_job_template: "infoblox - provision workloads"
-        all_parents_must_converge: "False"
+        all_parents_must_converge: "True"
         success_nodes:
           - verify workloads
       - identifier: "verify workloads"
