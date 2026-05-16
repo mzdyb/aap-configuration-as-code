@@ -134,40 +134,83 @@ controller_templates:
     state: present
 
 # paloalto
-  - name: "paloalto - basic fw operations"
+  - name: "paloalto - configure network"
     organization: "Default"
     project: "paloalto"
     inventory: "paloalto inventory"
-    playbook: "basic_fw_operations.yml"
+    playbook: "playbooks/configure_fw_network.yml"
     job_type: "run"
     execution_environment: "ee-panos"
+    credentials:
+      - "panos"
+    ask_variables_on_launch: true
+    state: present
+
+  - name: "paloalto - configure security policies"
+    organization: "Default"
+    project: "paloalto"
+    inventory: "paloalto inventory"
+    playbook: "playbooks/configure_fw_security_policies.yml"
+    job_type: "run"
+    execution_environment: "ee-panos"
+    credentials:
+      - "panos"
+    ask_variables_on_launch: true
     state: present
 
   - name: "paloalto - commit configuration"
     organization: "Default"
     project: "paloalto"
     inventory: "paloalto inventory"
-    playbook: "commit_config.yml"
+    playbook: "playbooks/commit_fw_config.yml"
     job_type: "run"
     execution_environment: "ee-panos"
+    credentials:
+      - "panos"
     state: present
 
-  - name: "paloalto - configure fw"
+  - name: "paloalto - show info"
     organization: "Default"
     project: "paloalto"
     inventory: "paloalto inventory"
-    playbook: "configure_fw.yml"
+    playbook: "playbooks/show_fw_info.yml"
     job_type: "run"
     execution_environment: "ee-panos"
+    credentials:
+      - "panos"
     state: present
 
-  - name: "paloalto - create security policies"
+  - name: "paloalto - backup configuration"
     organization: "Default"
     project: "paloalto"
     inventory: "paloalto inventory"
-    playbook: "create_security_policies.yml"
+    playbook: "playbooks/backup_fw_config.yml"
     job_type: "run"
     execution_environment: "ee-panos"
+    credentials:
+      - "panos"
+    state: present
+
+  - name: "paloalto - detect drift"
+    organization: "Default"
+    project: "paloalto"
+    inventory: "paloalto inventory"
+    playbook: "playbooks/detect_drift.yml"
+    job_type: "run"
+    execution_environment: "ee-panos"
+    credentials:
+      - "panos"
+    state: present
+
+  - name: "paloalto - remediate drift"
+    organization: "Default"
+    project: "paloalto"
+    inventory: "paloalto inventory"
+    playbook: "playbooks/remediate_drift.yml"
+    job_type: "run"
+    execution_environment: "ee-panos"
+    credentials:
+      - "panos"
     state: present
 
 # checkpoint
@@ -313,7 +356,7 @@ controller_templates:
     project: infoblox
     inventory: infoblox inventory
     playbook: playbooks/infrastructure_setup.yml
-    execution_environment: aap.rh.lab/ee-infoblox
+    execution_environment: ee-infoblox
     job_type: run
     credentials:
       - "Infoblox Portal"
@@ -324,7 +367,7 @@ controller_templates:
     project: infoblox
     inventory: infoblox inventory
     playbook: playbooks/infrastructure_verify.yml
-    execution_environment: aap.rh.lab/ee-infoblox
+    execution_environment: ee-infoblox
     job_type: run
     credentials:
       - "Infoblox Portal"
@@ -335,7 +378,7 @@ controller_templates:
     project: infoblox
     inventory: infoblox inventory
     playbook: playbooks/workload_provision.yml
-    execution_environment: aap.rh.lab/ee-infoblox
+    execution_environment: ee-infoblox
     job_type: run
     credentials:
       - "Infoblox Portal"
@@ -346,7 +389,7 @@ controller_templates:
     project: infoblox
     inventory: infoblox inventory
     playbook: playbooks/workload_verify.yml
-    execution_environment: aap.rh.lab/ee-infoblox
+    execution_environment: ee-infoblox
     job_type: run
     credentials:
       - "Infoblox Portal"

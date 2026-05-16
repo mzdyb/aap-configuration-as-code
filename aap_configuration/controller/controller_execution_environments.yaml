@@ -16,7 +16,7 @@ controller_execution_environments:
     pull: missing
 
   - name: ee-panos
-    image: aap.rh.lab/ee-panos:1.4
+    image: aap.rh.lab/ee-panos:1.0
     organization: null
     pull: missing
 
@@ -43,7 +43,7 @@ controller_execution_environments:
     organization: null
     pull: ''
 
-  - name: aap.rh.lab/ee-infoblox
+  - name: ee-infoblox
     image: aap.rh.lab/ee-infoblox:2.0
     organization: null
     pull: missing

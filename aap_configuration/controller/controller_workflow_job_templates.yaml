@@ -62,46 +62,92 @@ controller_workflows:
         unified_job_template: "EDA for networks - update incident"
         all_parents_must_converge: "False"
 
-  - name: "paloalto - provision fw configuration and security policies"
+  - name: "paloalto - provision firewall"
     organization: "Default"
     state: "present"
-    inventory: paloalto inventory
+    inventory: "paloalto inventory"
     simplified_workflow_nodes:
-      - identifier: "fw configuration"
-        unified_job_template: "paloalto - configure fw"
-        all_parents_must_converge: "False"
+      - identifier: "configure network"
+        unified_job_template: "paloalto - configure network"
         success_nodes:
-          - fw policies
-      - identifier: "fw policies"
-        unified_job_template: "paloalto - create security policies"
-        all_parents_must_converge: "False"
+          - configure security policies
+      - identifier: "configure security policies"
+        unified_job_template: "paloalto - configure security policies"
         success_nodes:
           - commit configuration
       - identifier: "commit configuration"
         unified_job_template: "paloalto - commit configuration"
-        all_parents_must_converge: "False"
+        success_nodes:
+          - show info
+      - identifier: "show info"
+        unified_job_template: "paloalto - show info"
 
-  - name: "paloalto - deprovision fw configuration and security policies"
+  - name: "paloalto - deprovision firewall"
     organization: "Default"
     state: "present"
-    inventory: paloalto inventory
-    extra_vars:
-      fw_config_state: absent
-      fw_rules_state: absent
+    inventory: "paloalto inventory"
     simplified_workflow_nodes:
-      - identifier: "remove fw policies"
-        unified_job_template: "paloalto - create security policies"
-        all_parents_must_converge: "False"
+      - identifier: "backup configuration"
+        unified_job_template: "paloalto - backup configuration"
         success_nodes:
-          - remove fw configuration
-      - identifier: "remove fw configuration"
-        unified_job_template: "paloalto - configure fw"
-        all_parents_must_converge: "False"
+          - remove security policies
+      - identifier: "remove security policies"
+        unified_job_template: "paloalto - configure security policies"
+        extra_data:
+          fw_rules_state: absent
+        success_nodes:
+          - remove network configuration
+      - identifier: "remove network configuration"
+        unified_job_template: "paloalto - configure network"
+        extra_data:
+          fw_config_state: absent
         success_nodes:
           - commit configuration
       - identifier: "commit configuration"
         unified_job_template: "paloalto - commit configuration"
-        all_parents_must_converge: "False"
+
+  - name: "paloalto - day 2 configuration change"
+    organization: "Default"
+    state: "present"
+    inventory: "paloalto inventory"
+    simplified_workflow_nodes:
+      - identifier: "backup configuration"
+        unified_job_template: "paloalto - backup configuration"
+        success_nodes:
+          - configure network
+      - identifier: "configure network"
+        unified_job_template: "paloalto - configure network"
+        success_nodes:
+          - configure security policies
+      - identifier: "configure security policies"
+        unified_job_template: "paloalto - configure security policies"
+        success_nodes:
+          - commit configuration
+      - identifier: "commit configuration"
+        unified_job_template: "paloalto - commit configuration"
+        success_nodes:
+          - detect drift
+      - identifier: "detect drift"
+        unified_job_template: "paloalto - detect drift"
+
+  - name: "paloalto - drift detection and remediation"
+    organization: "Default"
+    state: "present"
+    inventory: "paloalto inventory"
+    simplified_workflow_nodes:
+      - identifier: "detect drift"
+        unified_job_template: "paloalto - detect drift"
+        failure_nodes:
+          - approve remediation
+      - identifier: "approve remediation"
+        approval_node:
+          name: "Approve drift remediation"
+          description: "Review the drift report. Approve to proceed with remediation."
+          timeout: 0
+        success_nodes:
+          - remediate drift
+      - identifier: "remediate drift"
+        unified_job_template: "paloalto - remediate drift"
 
   - name: "cisco aci - configure aci"
     organization: "Default"

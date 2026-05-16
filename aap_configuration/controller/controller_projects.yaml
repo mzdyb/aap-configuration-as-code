@@ -59,7 +59,7 @@ controller_projects:
     organization: Default
     scm_type: git
     scm_url: https://github.com/mzdyb/infoblox.git
-    default_environment: aap.rh.lab/ee-infoblox:2.0
+    default_environment: ee-infoblox
     # credential: "github pat"
     scm_clean: no
     scm_delete_on_update: no
