@@ -90,6 +90,9 @@ controller_workflows:
     organization: "Default"
     state: "present"
     inventory: "paloalto inventory"
+    extra_vars:
+      fw_rules_state: absent
+      fw_config_state: absent
     simplified_workflow_nodes:
       - identifier: "synchronize repository"
         unified_job_template: "paloalto"
@@ -101,14 +104,10 @@ controller_workflows:
           - remove security policies
       - identifier: "remove security policies"
         unified_job_template: "paloalto - configure security policies"
-        extra_data:
-          fw_rules_state: absent
         success_nodes:
           - remove network configuration
       - identifier: "remove network configuration"
         unified_job_template: "paloalto - configure network"
-        extra_data:
-          fw_config_state: absent
         success_nodes:
           - commit configuration
       - identifier: "commit configuration"
