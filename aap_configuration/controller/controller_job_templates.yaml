@@ -143,7 +143,6 @@ controller_templates:
     execution_environment: "ee-panos"
     credentials:
       - "panos"
-    ask_variables_on_launch: true
     state: present
 
   - name: "paloalto - configure security policies"
@@ -155,7 +154,6 @@ controller_templates:
     execution_environment: "ee-panos"
     credentials:
       - "panos"
-    ask_variables_on_launch: true
     state: present
 
   - name: "paloalto - commit configuration"
