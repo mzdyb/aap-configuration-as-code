@@ -67,6 +67,10 @@ controller_workflows:
     state: "present"
     inventory: "paloalto inventory"
     simplified_workflow_nodes:
+      - identifier: "synchronize repository"
+        unified_job_template: "paloalto"
+        success_nodes:
+          - configure network
       - identifier: "configure network"
         unified_job_template: "paloalto - configure network"
         success_nodes:
@@ -87,6 +91,10 @@ controller_workflows:
     state: "present"
     inventory: "paloalto inventory"
     simplified_workflow_nodes:
+      - identifier: "synchronize repository"
+        unified_job_template: "paloalto"
+        success_nodes:
+          - backup configuration
       - identifier: "backup configuration"
         unified_job_template: "paloalto - backup configuration"
         success_nodes:
@@ -111,6 +119,10 @@ controller_workflows:
     state: "present"
     inventory: "paloalto inventory"
     simplified_workflow_nodes:
+      - identifier: "synchronize repository"
+        unified_job_template: "paloalto"
+        success_nodes:
+          - backup configuration
       - identifier: "backup configuration"
         unified_job_template: "paloalto - backup configuration"
         success_nodes:
@@ -135,6 +147,10 @@ controller_workflows:
     state: "present"
     inventory: "paloalto inventory"
     simplified_workflow_nodes:
+      - identifier: "synchronize repository"
+        unified_job_template: "paloalto"
+        success_nodes:
+          - detect drift
       - identifier: "detect drift"
         unified_job_template: "paloalto - detect drift"
         failure_nodes:
