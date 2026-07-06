@@ -392,3 +392,47 @@ controller_templates:
     credentials:
       - "Infoblox Portal"
     state: present
+
+# AI Firewall Automation
+  - name: "AI FW - Process connectivity request"
+    organization: "Default"
+    project: "ai-firewall-automation"
+    inventory: "AI FW inventory"
+    playbook: "playbooks/process_request.yml"
+    job_type: "run"
+    execution_environment: "ee-panos-snow"
+    credentials:
+      - "panos"
+      - "openai-api"
+      - "github pat ai-fw"
+      - "servicenow-instance"
+    ask_variables_on_launch: true
+    state: present
+
+  - name: "AI FW - Create change request"
+    organization: "Default"
+    project: "ai-firewall-automation"
+    inventory: "AI FW inventory"
+    playbook: "playbooks/create_change_request.yml"
+    job_type: "run"
+    execution_environment: "ee-panos-snow"
+    credentials:
+      - "openai-api"
+      - "servicenow-instance"
+      - "github pat ai-fw"   # JT2 clones the SOT repo to read the PR branch
+    ask_variables_on_launch: true
+    state: present
+
+  - name: "AI FW - Deploy firewall rules"
+    organization: "Default"
+    project: "ai-firewall-automation"
+    inventory: "AI FW inventory"
+    playbook: "playbooks/deploy_fw_rules.yml"
+    job_type: "run"
+    execution_environment: "ee-panos-snow"
+    credentials:
+      - "panos"
+      - "github pat ai-fw"
+      - "servicenow-instance"
+    ask_variables_on_launch: true
+    state: present

@@ -8,3 +8,30 @@ eda_rulebook_activations:
     eda_credentials: AAP
     restart_policy: never
     state: disabled
+
+  - name: "AI FW - ServiceNow request"
+    organization: Default
+    project: ai-firewall-automation
+    rulebook: 01_snow_request.yml
+    decision_environment: de-supported-rhel9
+    eda_credentials: AAP
+    restart_policy: on-failure
+    state: enabled
+
+  - name: "AI FW - PR approved"
+    organization: Default
+    project: ai-firewall-automation
+    rulebook: 02_pr_approved.yml
+    decision_environment: de-supported-rhel9
+    eda_credentials: AAP
+    restart_policy: on-failure
+    state: enabled
+
+  - name: "AI FW - Change approved"
+    organization: Default
+    project: ai-firewall-automation
+    rulebook: 03_chg_approved.yml
+    decision_environment: de-supported-rhel9
+    eda_credentials: AAP
+    restart_policy: on-failure
+    state: enabled

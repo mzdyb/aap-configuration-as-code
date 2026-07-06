@@ -60,4 +60,4 @@ Feedback is always welcome! If you have any comments, please reach me out
 
 ## Author
 
-[@mzdyb](https://www.linkedin.com/in/michal-zdyb-9aa4046/)
+[Michal Zdyb](https://www.linkedin.com/in/michal-zdyb-9aa4046/)

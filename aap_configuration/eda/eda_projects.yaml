@@ -5,3 +5,10 @@ eda_projects:
     organization: "Default"
     url: https://github.com/mzdyb/event-driven-ansible-for-networks.git
     tls_validation: true
+
+  - name: "ai-firewall-automation"
+    description: "AI-assisted firewall change pipeline"
+    organization: "Default"
+    url: https://github.com/mzdyb/ansible-ai-firewall-automation.git
+    credential: "ai-fw scm"
+    tls_validation: true

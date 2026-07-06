@@ -64,3 +64,11 @@ controller_projects:
     scm_clean: no
     scm_delete_on_update: no
     scm_update_on_launch: no
+
+  - name: ai-firewall-automation
+    organization: Default
+    scm_type: git
+    scm_url: https://github.com/mzdyb/ansible-ai-firewall-automation.git
+    default_environment: ee-panos-snow
+    credential: "ai-fw scm"
+    scm_update_on_launch: true

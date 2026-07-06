@@ -1,20 +1,13 @@
 ---
+# Inventories only. All SCM inventory sources are defined in ONE place:
+# controller_inventory_sources.yaml (single owner for source attributes like
+# update_on_launch and credential).
 controller_inventories:
   - name: checkpoint inventory
     organization: Default
-    sources:
-      - name: checkpoint repo
-        source: scm
-        source_project: checkpoint
-        source_path: inventory
 
   - name: cisco aci inventory
     organization: Default
-    sources:
-      - name: inventory file
-        source: scm
-        source_project: cisco-aci
-        source_path: inventory
 
   - name: Demo Inventory
     organization: Default
@@ -26,48 +19,21 @@ controller_inventories:
 
   - name: EDA for networks inventory
     organization: Default
-    sources:
-      - name: EDA for networks
-        source: scm
-        source_project: eda-for-networks
-        source_path: inventory
 
   - name: f5 big ip inventory
     organization: Default
-    sources:
-      - name: f5-big-ip repo
-        source: scm
-        source_project: f5-big-ip
-        source_path: inventory
 
   - name: paloalto inventory
     organization: Default
-    sources:
-      - name: paloalto source
-        source: scm
-        source_project: paloalto
-        source_path: inventory
 
   - name: arista-avd-aap inventory
     organization: Default
-    sources:
-      - name: arista-avd-aap source
-        source: scm
-        source_project: arista-avd-aap
-        source_path: inventory
 
   - name: network-cac inventory
     organization: Default
-    sources:
-      - name: network-cac source
-        source: scm
-        source_project: network-cac
-        source_path: inventory
 
   - name: infoblox inventory
     organization: Default
-    sources:
-      - name: infoblox source
-        source: scm
-        source_project: infoblox
-        source_path: inventory
+
+  - name: AI FW inventory
+    organization: Default
