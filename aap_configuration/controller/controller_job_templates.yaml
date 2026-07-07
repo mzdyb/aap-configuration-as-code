@@ -405,7 +405,7 @@ controller_templates:
       - "panos"
       - "openai-api"
       - "github pat ai-fw"
-      - "servicenow-instance"
+      - "servicenow_instance"
     ask_variables_on_launch: true
     state: present
 
@@ -418,7 +418,7 @@ controller_templates:
     execution_environment: "ee-panos-snow"
     credentials:
       - "openai-api"
-      - "servicenow-instance"
+      - "servicenow_instance"
       - "github pat ai-fw"   # JT2 clones the SOT repo to read the PR branch
     ask_variables_on_launch: true
     state: present
@@ -433,6 +433,6 @@ controller_templates:
     credentials:
       - "panos"
       - "github pat ai-fw"
-      - "servicenow-instance"
+      - "servicenow_instance"
     ask_variables_on_launch: true
     state: present
