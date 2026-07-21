@@ -68,7 +68,7 @@ controller_projects:
   - name: ai-firewall-automation
     organization: Default
     scm_type: git
-    scm_url: https://github.com/mzdyb/ansible-ai-firewall-automation.git
+    scm_url: https://github.com/mzdyb/ansible-aiops-firewall-orchestration.git
     default_environment: ee-panos-snow
     credential: "ai-fw scm"
     scm_update_on_launch: true
