@@ -12,3 +12,9 @@ eda_projects:
     url: https://github.com/mzdyb/ansible-ai-firewall-automation.git
     credential: "ai-fw scm"
     tls_validation: true
+
+  - name: "infoblox-eda-servicenow"
+    description: "ServiceNow-driven Infoblox host provisioning and decommissioning"
+    organization: "Default"
+    url: https://github.com/mzdyb/infoblox-eda-servicenow.git
+    tls_validation: true

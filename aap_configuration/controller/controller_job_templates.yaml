@@ -67,7 +67,7 @@ controller_templates:
     verbosity: 3
     job_type: "run"
     credentials:
-      - "servicenow-instance"
+      - "servicenow_instance"
     job_tags: "create_incident"
     notification_templates_started:
       - "network-events slack channel"
@@ -110,7 +110,7 @@ controller_templates:
     playbook: "playbooks/manage_incident.yml"
     job_type: "run"
     credentials:
-      - "servicenow-instance"
+      - "servicenow_instance"
     job_tags: "update_incident_succesfull"
     notification_templates_started:
       - "network-events slack channel"
@@ -125,7 +125,7 @@ controller_templates:
     playbook: "playbooks/manage_incident.yml"
     job_type: "run"
     credentials:
-      - "servicenow-instance"
+      - "servicenow_instance"
     job_tags: "update_incident_unsuccesfull"
     notification_templates_started:
       - "network-events slack channel"
@@ -434,5 +434,52 @@ controller_templates:
       - "panos"
       - "github pat ai-fw"
       - "servicenow_instance"
+    ask_variables_on_launch: true
+    state: present
+
+# infoblox EDA ServiceNow
+  - name: "infoblox - SNOW provision host"
+    organization: Default
+    project: infoblox-eda-servicenow
+    inventory: infoblox-eda-servicenow inventory
+    playbook: playbooks/provision_host.yml
+    execution_environment: ee-infoblox-snow
+    job_type: run
+    credentials:
+      - "Infoblox Portal"
+    state: present
+
+  - name: "infoblox - SNOW verify host"
+    organization: Default
+    project: infoblox-eda-servicenow
+    inventory: infoblox-eda-servicenow inventory
+    playbook: playbooks/verify_host.yml
+    execution_environment: ee-infoblox-snow
+    job_type: run
+    credentials:
+      - "Infoblox Portal"
+    state: present
+
+  - name: "infoblox - SNOW decommission host"
+    organization: Default
+    project: infoblox-eda-servicenow
+    inventory: infoblox-eda-servicenow inventory
+    playbook: playbooks/decommission_host.yml
+    execution_environment: ee-infoblox-snow
+    job_type: run
+    credentials:
+      - "Infoblox Portal"
+    state: present
+
+  - name: "infoblox - SNOW update request"
+    organization: Default
+    project: infoblox-eda-servicenow
+    inventory: infoblox-eda-servicenow inventory
+    playbook: playbooks/servicenow_update.yml
+    execution_environment: ee-infoblox-snow
+    job_type: run
+    credentials:
+      - "servicenow_instance"
+    # Workflow nodes pass snow_outcome as node extra_data, which requires prompting for vars.
     ask_variables_on_launch: true
     state: present

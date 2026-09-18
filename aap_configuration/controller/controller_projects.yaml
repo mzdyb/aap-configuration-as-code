@@ -72,3 +72,10 @@ controller_projects:
     default_environment: ee-panos-snow
     credential: "ai-fw scm"
     scm_update_on_launch: true
+
+  - name: infoblox-eda-servicenow
+    organization: Default
+    scm_type: git
+    scm_url: https://github.com/mzdyb/infoblox-eda-servicenow.git
+    default_environment: ee-infoblox-snow
+    scm_update_on_launch: true

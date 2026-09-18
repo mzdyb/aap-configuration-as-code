@@ -35,3 +35,13 @@ eda_rulebook_activations:
     eda_credentials: AAP
     restart_policy: on-failure
     state: enabled
+
+  # Webhook on port 5000 (AI FW activations use 5001-5003).
+  - name: "infoblox - ServiceNow host requests"
+    organization: Default
+    project: infoblox-eda-servicenow
+    rulebook: servicenow.yml
+    decision_environment: de-supported-rhel9
+    eda_credentials: AAP
+    restart_policy: on-failure
+    state: enabled

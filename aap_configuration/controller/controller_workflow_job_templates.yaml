@@ -346,3 +346,82 @@ controller_workflows:
       - identifier: "verify workloads"
         unified_job_template: "infoblox - verify workloads"
         all_parents_must_converge: "False"
+
+  # Names are launched by rulebooks/servicenow.yml in infoblox-eda-servicenow.
+  - name: "infoblox - SNOW host provision workflow"
+    organization: "Default"
+    state: "present"
+    ask_variables_on_launch: "True"
+    # Nodes are rebuilt from this file; without it, renamed or removed nodes linger in AAP.
+    destroy_current_nodes: true
+    simplified_workflow_nodes:
+      # always_nodes: an unreachable ServiceNow must not stop the Infoblox work.
+      - identifier: "RITM note started"
+        unified_job_template: "infoblox - SNOW update request"
+        all_parents_must_converge: "False"
+        extra_data:
+          snow_outcome: started
+        always_nodes:
+          - provision host
+      - identifier: "provision host"
+        unified_job_template: "infoblox - SNOW provision host"
+        all_parents_must_converge: "False"
+        success_nodes:
+          - verify host
+        failure_nodes:
+          - rollback
+      - identifier: "verify host"
+        unified_job_template: "infoblox - SNOW verify host"
+        all_parents_must_converge: "False"
+        success_nodes:
+          - RITM closed
+        failure_nodes:
+          - rollback
+      - identifier: "rollback"
+        unified_job_template: "infoblox - SNOW decommission host"
+        all_parents_must_converge: "False"
+        always_nodes:
+          - RITM note failure
+      - identifier: "RITM closed"
+        unified_job_template: "infoblox - SNOW update request"
+        all_parents_must_converge: "False"
+        extra_data:
+          snow_outcome: success
+      - identifier: "RITM note failure"
+        unified_job_template: "infoblox - SNOW update request"
+        all_parents_must_converge: "False"
+        extra_data:
+          snow_outcome: failed_rolled_back
+
+  # No rollback node: a failed deletion is never recreated.
+  - name: "infoblox - SNOW host decommission workflow"
+    organization: "Default"
+    state: "present"
+    ask_variables_on_launch: "True"
+    # Nodes are rebuilt from this file; without it, renamed or removed nodes linger in AAP.
+    destroy_current_nodes: true
+    simplified_workflow_nodes:
+      - identifier: "RITM note started"
+        unified_job_template: "infoblox - SNOW update request"
+        all_parents_must_converge: "False"
+        extra_data:
+          snow_outcome: started
+        always_nodes:
+          - decommission host
+      - identifier: "decommission host"
+        unified_job_template: "infoblox - SNOW decommission host"
+        all_parents_must_converge: "False"
+        success_nodes:
+          - RITM closed
+        failure_nodes:
+          - RITM note failure
+      - identifier: "RITM closed"
+        unified_job_template: "infoblox - SNOW update request"
+        all_parents_must_converge: "False"
+        extra_data:
+          snow_outcome: success
+      - identifier: "RITM note failure"
+        unified_job_template: "infoblox - SNOW update request"
+        all_parents_must_converge: "False"
+        extra_data:
+          snow_outcome: failed_rolled_back

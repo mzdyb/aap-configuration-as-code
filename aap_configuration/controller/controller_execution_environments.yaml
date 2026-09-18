@@ -52,3 +52,8 @@ controller_execution_environments:
     image: aap.rh.lab/ee-panos-snow:1.0
     organization: null
     pull: missing
+
+  - name: ee-infoblox-snow
+    image: aap.rh.lab/ee-infoblox-snow:1.0
+    organization: null
+    pull: missing

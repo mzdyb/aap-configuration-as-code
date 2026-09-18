@@ -37,3 +37,7 @@ controller_inventories:
 
   - name: AI FW inventory
     organization: Default
+
+  # No hosts: the playbooks run against implicit localhost.
+  - name: infoblox-eda-servicenow inventory
+    organization: Default

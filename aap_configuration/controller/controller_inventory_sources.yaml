@@ -38,7 +38,7 @@ controller_inventory_sources:
     inventory: "paloalto inventory"
     update_on_launch: "False"
     overwrite: "False"
-    credential: "servicenow-instance"
+    credential: "servicenow_instance"
   - name: "inventory file"
     description: ""
     organization: "Default"
