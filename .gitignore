@@ -3,5 +3,8 @@ ansible-navigator.log
 *-artifact-*
 .ssh
 secret_vars
+
+#EE
+context
+files
 tar.gz
-README.md

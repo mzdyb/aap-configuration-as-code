@@ -3,6 +3,10 @@
   hosts: localhost
   vars:
     aap_validate_certs: false
+    # The roles fire every API call at once; a lab controller times out at the 10s default.
+    aap_request_timeout: 60
+    aap_configuration_loop_delay: 1
+    aap_configuration_async_retries: 90
     # Variables moved to secret_vars file:
     # aap_username: "{{ vault_aap_username | default(lookup('env', 'CONTROLLER_USERNAME')) }}"
     # aap_password: "{{ vault_aap_password | default(lookup('env', 'CONTROLLER_PASSWORD')) }}"
