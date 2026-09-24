@@ -88,3 +88,16 @@ controller_inventory_sources:
     inventory: "AI FW inventory"
     update_on_launch: "True"
     overwrite: "False"
+
+  - name: "infoblox-eda-servicenow source"
+    description: ""
+    organization: "Default"
+    source: "scm"
+    source_project: "infoblox-eda-servicenow"
+    source_path: "inventory"
+    inventory: "infoblox-eda-servicenow inventory"
+    update_on_launch: "True"
+    # A ticket runs four job templates off this inventory; without the timeout
+    # each launch re-syncs a file that almost never changes.
+    update_cache_timeout: 3600
+    overwrite: "False"
