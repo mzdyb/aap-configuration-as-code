@@ -25,21 +25,21 @@ controller_execution_environments:
     organization: null
     pull: missing
 
-  - name: ansible-automation-platform-25/ee-supported-rhel8
-    image: registry.redhat.io/ansible-automation-platform-25/ee-supported-rhel8:latest
+  - name: ansible-automation-platform-27/ee-supported-rhel8
+    image: registry.redhat.io/ansible-automation-platform-27/ee-supported-rhel8:latest
     organization: null
     pull: missing
     credential: registry.redhat.io
 
-  - name: ansible-automation-platform-25/ee-supported-rhel9
-    image: registry.redhat.io/ansible-automation-platform-25/ee-supported-rhel9:latest
+  - name: ansible-automation-platform-27/ee-supported-rhel9
+    image: registry.redhat.io/ansible-automation-platform-27/ee-supported-rhel9:latest
     organization: null
     pull: missing
     credential: registry.redhat.io
 
 
-  - name: ansible-automation-platform-25/ee-minimal-rhel8
-    image: registry.redhat.io/ansible-automation-platform-25/ee-minimal-rhel8:latest
+  - name: ansible-automation-platform-27/ee-minimal-rhel8
+    image: registry.redhat.io/ansible-automation-platform-27/ee-minimal-rhel8:latest
     organization: null
     pull: ''
 

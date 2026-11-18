@@ -8,7 +8,7 @@ controller_inventory_sources:
     source_path: "inventory"
     inventory: "checkpoint inventory"
     update_on_launch: "False"
-    overwrite: "False"
+    overwrite: "True"
 
   - name: "f5-big-ip repo"
     description: ""

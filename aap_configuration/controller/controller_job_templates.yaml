@@ -218,6 +218,8 @@ controller_templates:
     inventory: "checkpoint inventory"
     playbook: "playbooks/install_policy.yml"
     job_type: "run"
+    credentials:
+      - "checkpoint"
     state: present
   
   - name: "checkpoint - manage access rules"
@@ -226,6 +228,8 @@ controller_templates:
     inventory: "checkpoint inventory"
     playbook: "playbooks/manage_configuration.yml"
     job_type: "run"
+    credentials:
+      - "checkpoint"
     job_tags: "access_rules"
     state: present
 
@@ -235,6 +239,8 @@ controller_templates:
     inventory: "checkpoint inventory"
     playbook: "playbooks/manage_configuration.yml"
     job_type: "run"
+    credentials:
+      - "checkpoint"
     job_tags: "objects"
     state: present
 

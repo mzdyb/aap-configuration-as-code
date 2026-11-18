@@ -1,8 +1,14 @@
 ---
 collections:
   - name: ansible.platform
+    version: "2.7.20260930"
   - name: ansible.hub
+    version: "1.1.2"
   - name: ansible.controller
+    version: "4.8.12"
   - name: ansible.eda
+    version: "2.13.0"
   - name: infra.aap_configuration
+    version: "4.11.1"
   - name: infra.aap_configuration_extended
+    version: "4.13.0"
