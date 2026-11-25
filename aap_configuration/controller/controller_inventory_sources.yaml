@@ -101,3 +101,17 @@ controller_inventory_sources:
     # each launch re-syncs a file that almost never changes.
     update_cache_timeout: 3600
     overwrite: "False"
+
+  # Synced before every job: a rebuilt VM gets a new public IP.
+  - name: "checkpoint-azure azure_rm"
+    organization: "Default"
+    source: "scm"
+    source_project: "checkpoint-azure-automation"
+    source_path: "inventory/azure_rm.yml"
+    inventory: "checkpoint-azure inventory"
+    credential: "checkpoint-azure azure rm"
+    execution_environment: ee-checkpoint-azure
+    update_on_launch: true
+    update_cache_timeout: 0
+    overwrite: true
+    overwrite_vars: true

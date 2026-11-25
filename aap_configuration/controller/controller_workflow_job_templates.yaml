@@ -164,6 +164,50 @@ controller_workflows:
       - identifier: "remediate drift"
         unified_job_template: "paloalto - remediate drift"
 
+  # Network first: the rules reference zones it creates.
+  - name: "AI FW - provision firewalls"
+    organization: "Default"
+    state: "present"
+    # Without it, nodes removed here stay in AAP.
+    destroy_current_nodes: true
+    simplified_workflow_nodes:
+      - identifier: "configure network"
+        unified_job_template: "AI FW - configure network"
+        success_nodes:
+          - "configure security policies"
+      - identifier: "configure security policies"
+        unified_job_template: "AI FW - configure security policies"
+        success_nodes:
+          - "commit configuration"
+      - identifier: "commit configuration"
+        unified_job_template: "AI FW - commit configuration"
+
+  # Pushes to main as the bot. Firewall steps are separate jobs so they load the restored host_vars.
+  - name: "AI FW - reset demo baseline"
+    organization: "Default"
+    state: "present"
+    # Without it, nodes removed here stay in AAP.
+    destroy_current_nodes: true
+    simplified_workflow_nodes:
+      - identifier: "restore baseline in git"
+        unified_job_template: "AI FW - restore baseline in git"
+        success_nodes:
+          - "delete unmanaged rules"
+      - identifier: "delete unmanaged rules"
+        unified_job_template: "AI FW - delete unmanaged firewall rules"
+        success_nodes:
+          - "configure network"
+      - identifier: "configure network"
+        unified_job_template: "AI FW - configure network"
+        success_nodes:
+          - "configure security policies"
+      - identifier: "configure security policies"
+        unified_job_template: "AI FW - configure security policies"
+        success_nodes:
+          - "commit configuration"
+      - identifier: "commit configuration"
+        unified_job_template: "AI FW - commit configuration"
+
   - name: "cisco aci - configure aci"
     organization: "Default"
     state: "present"
@@ -425,3 +469,58 @@ controller_workflows:
         all_parents_must_converge: "False"
         extra_data:
           snow_outcome: failed_rolled_back
+
+  - name: "checkpoint-azure - deploy Check Point Cloud Firewall environment"
+    organization: Default
+    state: present
+    # Without it, nodes removed here stay in AAP.
+    destroy_current_nodes: true
+    simplified_workflow_nodes:
+      - identifier: "deploy firewall"
+        unified_job_template: "checkpoint-azure - deploy fw vm"
+        success_nodes:
+          - "azure network"
+      - identifier: "azure network"
+        unified_job_template: "checkpoint-azure - configure azure network"
+        success_nodes:
+          - "mgmt access"
+      - identifier: "mgmt access"
+        unified_job_template: "checkpoint-azure - open fw management access"
+        success_nodes:
+          - "fw gaia"
+      - identifier: "fw gaia"
+        unified_job_template: "checkpoint-azure - configure fw gaia"
+        success_nodes:
+          - "fw objects"
+      - identifier: "fw objects"
+        unified_job_template: "checkpoint-azure - manage fw objects"
+        success_nodes:
+          - "fw policy"
+      - identifier: "fw policy"
+        unified_job_template: "checkpoint-azure - manage fw policy"
+
+  - name: "checkpoint-azure - handle firewall rule request"
+    organization: Default
+    state: present
+    # The rulebook sends the request as extra vars.
+    ask_variables_on_launch: true
+    # Without it, nodes removed here stay in AAP.
+    destroy_current_nodes: true
+    simplified_workflow_nodes:
+      - identifier: "apply rule request"
+        unified_job_template: "checkpoint-azure - implement rule request from snow"
+        always_nodes:
+          - "ticket update"
+      - identifier: "ticket update"
+        unified_job_template: "checkpoint-azure - update snow ticket"
+
+  - name: "checkpoint-azure - apply fw configuration"
+    organization: Default
+    state: present
+    simplified_workflow_nodes:
+      - identifier: "fw objects"
+        unified_job_template: "checkpoint-azure - manage fw objects"
+        success_nodes:
+          - "fw policy"
+      - identifier: "fw policy"
+        unified_job_template: "checkpoint-azure - manage fw policy"

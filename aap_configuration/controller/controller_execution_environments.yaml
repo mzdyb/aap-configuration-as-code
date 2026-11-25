@@ -57,3 +57,8 @@ controller_execution_environments:
     image: aap.rh.lab/ee-infoblox-snow:1.0
     organization: null
     pull: missing
+
+  - name: ee-checkpoint-azure
+    image: aap.rh.lab/ee-checkpoint-azure:1.0
+    organization: Default
+    pull: missing

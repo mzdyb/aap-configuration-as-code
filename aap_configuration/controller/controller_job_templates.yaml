@@ -408,7 +408,7 @@ controller_templates:
     job_type: "run"
     execution_environment: "ee-panos-snow"
     credentials:
-      - "panos"
+      - "ai-fw panos"
       - "openai-api"
       - "github pat ai-fw"
       - "servicenow_instance"
@@ -437,10 +437,65 @@ controller_templates:
     job_type: "run"
     execution_environment: "ee-panos-snow"
     credentials:
-      - "panos"
+      - "ai-fw panos"
       - "github pat ai-fw"
       - "servicenow_instance"
     ask_variables_on_launch: true
+    state: present
+
+  - name: "AI FW - configure network"
+    organization: "Default"
+    project: "ai-firewall-automation"
+    inventory: "AI FW inventory"
+    playbook: "playbooks/configure_fw_network.yml"
+    job_type: "run"
+    execution_environment: "ee-panos-snow"
+    credentials:
+      - "ai-fw panos"
+    state: present
+
+  - name: "AI FW - configure security policies"
+    organization: "Default"
+    project: "ai-firewall-automation"
+    inventory: "AI FW inventory"
+    playbook: "playbooks/configure_fw_security_policies.yml"
+    job_type: "run"
+    execution_environment: "ee-panos-snow"
+    credentials:
+      - "ai-fw panos"
+    state: present
+
+  - name: "AI FW - commit configuration"
+    organization: "Default"
+    project: "ai-firewall-automation"
+    inventory: "AI FW inventory"
+    playbook: "playbooks/commit_fw_config.yml"
+    job_type: "run"
+    execution_environment: "ee-panos-snow"
+    credentials:
+      - "ai-fw panos"
+    state: present
+
+  - name: "AI FW - restore baseline in git"
+    organization: "Default"
+    project: "ai-firewall-automation"
+    inventory: "AI FW inventory"
+    playbook: "playbooks/restore_baseline_git.yml"
+    job_type: "run"
+    execution_environment: "ee-panos-snow"
+    credentials:
+      - "github pat ai-fw"
+    state: present
+
+  - name: "AI FW - delete unmanaged firewall rules"
+    organization: "Default"
+    project: "ai-firewall-automation"
+    inventory: "AI FW inventory"
+    playbook: "playbooks/delete_unmanaged_fw_rules.yml"
+    job_type: "run"
+    execution_environment: "ee-panos-snow"
+    credentials:
+      - "ai-fw panos"
     state: present
 
 # infoblox EDA ServiceNow
@@ -488,4 +543,112 @@ controller_templates:
       - "servicenow_instance"
     # Workflow nodes pass snow_outcome as node extra_data, which requires prompting for vars.
     ask_variables_on_launch: true
+    state: present
+
+  - name: "checkpoint-azure - deploy fw vm"
+    organization: Default
+    project: checkpoint-azure-automation
+    inventory: checkpoint-azure inventory
+    playbook: playbooks/10_checkpoint_deploy.yml
+    execution_environment: ee-checkpoint-azure
+    job_type: run
+    credentials:
+      - "checkpoint-azure azure rm"
+      - "checkpoint-azure check point api"
+      - "checkpoint-azure access ips"
+    state: present
+
+  - name: "checkpoint-azure - open fw management access"
+    organization: Default
+    project: checkpoint-azure-automation
+    inventory: checkpoint-azure inventory
+    playbook: playbooks/30_checkpoint_access.yml
+    execution_environment: ee-checkpoint-azure
+    job_type: run
+    credentials:
+      - "checkpoint-azure check point api"
+      - "checkpoint-azure access ips"
+    state: present
+
+  - name: "checkpoint-azure - configure azure network"
+    organization: Default
+    project: checkpoint-azure-automation
+    inventory: checkpoint-azure inventory
+    playbook: playbooks/20_azure_network.yml
+    execution_environment: ee-checkpoint-azure
+    job_type: run
+    credentials:
+      - "checkpoint-azure azure rm"
+      - "checkpoint-azure access ips"
+    state: present
+
+  - name: "checkpoint-azure - configure fw gaia"
+    organization: Default
+    project: checkpoint-azure-automation
+    inventory: checkpoint-azure inventory
+    playbook: playbooks/40_checkpoint_gaia.yml
+    execution_environment: ee-checkpoint-azure
+    job_type: run
+    credentials:
+      - "checkpoint-azure check point api"
+      - "checkpoint-azure access ips"
+    state: present
+
+  - name: "checkpoint-azure - manage fw objects"
+    organization: Default
+    project: checkpoint-azure-automation
+    inventory: checkpoint-azure inventory
+    playbook: playbooks/41_checkpoint_objects.yml
+    execution_environment: ee-checkpoint-azure
+    job_type: run
+    credentials:
+      - "checkpoint-azure check point api"
+      - "checkpoint-azure access ips"
+    state: present
+
+  - name: "checkpoint-azure - manage fw policy"
+    organization: Default
+    project: checkpoint-azure-automation
+    inventory: checkpoint-azure inventory
+    playbook: playbooks/42_checkpoint_policy.yml
+    execution_environment: ee-checkpoint-azure
+    job_type: run
+    credentials:
+      - "checkpoint-azure check point api"
+      - "checkpoint-azure access ips"
+    state: present
+
+  - name: "checkpoint-azure - implement rule request from snow"
+    organization: Default
+    project: checkpoint-azure-automation
+    inventory: checkpoint-azure inventory
+    playbook: playbooks/50_rule_request.yml
+    execution_environment: ee-checkpoint-azure
+    job_type: run
+    credentials:
+      - "checkpoint-azure check point api"
+      - "checkpoint-azure access ips"
+    state: present
+
+  - name: "checkpoint-azure - update snow ticket"
+    organization: Default
+    project: checkpoint-azure-automation
+    inventory: checkpoint-azure inventory
+    playbook: playbooks/60_servicenow_update.yml
+    execution_environment: ee-checkpoint-azure
+    job_type: run
+    credentials:
+      - servicenow_instance
+    state: present
+
+  - name: "checkpoint-azure - teardown Check Point Cloud Firewall environment"
+    organization: Default
+    project: checkpoint-azure-automation
+    inventory: checkpoint-azure inventory
+    playbook: playbooks/99_teardown.yml
+    execution_environment: ee-checkpoint-azure
+    job_type: run
+    credentials:
+      - "checkpoint-azure azure rm"
+      - "checkpoint-azure access ips"
     state: present

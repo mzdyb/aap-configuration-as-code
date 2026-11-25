@@ -45,3 +45,15 @@ eda_rulebook_activations:
     eda_credentials: AAP
     restart_policy: on-failure
     state: enabled
+
+  - name: "checkpoint-azure ServiceNow rule requests"
+    organization: Default
+    project: checkpoint-azure-automation
+    rulebook: servicenow_rule_request.yml
+    decision_environment: de-supported-rhel9
+    eda_credentials: AAP
+    event_streams:
+      - event_stream: "checkpoint-azure servicenow"
+        source_name: servicenow
+    restart_policy: on-failure
+    state: enabled

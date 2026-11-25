@@ -18,3 +18,10 @@ eda_projects:
     organization: "Default"
     url: https://github.com/mzdyb/infoblox-eda-servicenow.git
     tls_validation: true
+
+  - name: "checkpoint-azure-automation"
+    description: "ServiceNow firewall rule requests for the Check Point Azure demo"
+    organization: Default
+    url: https://github.com/mzdyb/checkpoint-azure-automation.git
+    credential: "checkpoint-azure scm"
+    tls_validation: true

@@ -1,0 +1,6 @@
+---
+eda_event_streams:
+  - name: "checkpoint-azure servicenow"
+    credential_name: "checkpoint-azure servicenow event stream"
+    organization: Default
+    forward_events: true

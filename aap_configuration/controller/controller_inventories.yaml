@@ -40,3 +40,6 @@ controller_inventories:
 
   - name: infoblox-eda-servicenow inventory
     organization: Default
+
+  - name: "checkpoint-azure inventory"
+    organization: Default

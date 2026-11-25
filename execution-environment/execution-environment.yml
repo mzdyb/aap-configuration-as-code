@@ -15,7 +15,7 @@ additional_build_steps:
     - ENV ANSIBLE_GALAXY_SERVER_CERTIFIED_CONTENT_AUTH_URL=https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token
     - ENV ANSIBLE_GALAXY_SERVER_VALIDATED_CONTENT_URL=https://console.redhat.com/api/automation-hub/content/validated/
     - ENV ANSIBLE_GALAXY_SERVER_VALIDATED_CONTENT_AUTH_URL=https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token
-    # pass the offline token: --build-arg ANSIBLE_GALAXY_SERVER_{CERTIFIED,VALIDATED}_CONTENT_TOKEN=$AH_TOKEN
+    # pass the offline token: --build-arg ANSIBLE_GALAXY_SERVER_{CERTIFIED,VALIDATED}_CONTENT_TOKEN="$(cat ~/.config/redhat/hub-token)"
     - ARG ANSIBLE_GALAXY_SERVER_CERTIFIED_CONTENT_TOKEN
     - ARG ANSIBLE_GALAXY_SERVER_VALIDATED_CONTENT_TOKEN
 
