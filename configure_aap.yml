@@ -22,10 +22,12 @@
       ansible.builtin.include_vars:
         file: ./secret_vars
       no_log: true
+      tags: always
 
     - name: Include AAP configuration variables
       ansible.builtin.include_vars:
         dir: ./aap_configuration
+      tags: always
 
   roles:
     - infra.aap_configuration.dispatch
